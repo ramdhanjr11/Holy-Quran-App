@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        centerTitle: false,
         elevation: 0,
         title: Text(
           'Quran App',
