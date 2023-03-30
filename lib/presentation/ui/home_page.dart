@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
+import 'package:holy_quran_app/presentation/ui/surah_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -146,7 +147,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   alignment: Alignment.center,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, SurahPage.routeName);
+                },
               ),
               const SizedBox(height: 16),
               _buildMenuTile(
