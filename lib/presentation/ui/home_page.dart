@@ -93,10 +93,10 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Row(
                             children: [
-                              const Icon(
-                                Icons.book,
+                              SvgPicture.asset(
+                                'assets/book_icon.svg',
                                 color: Colors.white,
-                                size: 20,
+                                height: 20,
                               ),
                               const SizedBox(width: 6),
                               Text(
@@ -127,10 +127,98 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-              )
+              ),
+              const SizedBox(height: 32),
+              Text(
+                'Menu',
+                style: textTheme.titleLarge!
+                    .copyWith(color: appLightPrimaryTextColor),
+              ),
+              const SizedBox(height: 24),
+              _buildMenuTile(
+                gradientColor1: appLightGreenMenuColor,
+                gradientColor2: appLightPurpleMenuColor,
+                title: 'Read Qur\'an',
+                subtitle: 'Menu 1',
+                textTheme: textTheme,
+                svgIcon: SvgPicture.asset(
+                  'assets/quran_icon.svg',
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                ),
+                onTap: () {},
+              ),
+              const SizedBox(height: 16),
+              _buildMenuTile(
+                gradientColor1: appLightBlueMenuColor,
+                gradientColor2: appLightPurpleMenuColor,
+                title: 'Sholat Time',
+                subtitle: 'Menu 2',
+                textTheme: textTheme,
+                svgIcon: SvgPicture.asset(
+                  'assets/prayer_man_icon.svg',
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                ),
+                onTap: () {},
+              ),
+              const SizedBox(height: 16),
+              _buildMenuTile(
+                gradientColor1: appLightOrangeColor,
+                gradientColor2: appLightPurpleMenuColor,
+                title: 'Saved Ayah',
+                subtitle: 'Menu 3',
+                textTheme: textTheme,
+                icon: const Icon(
+                  Icons.bookmark_outline,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onTap: () {},
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildMenuTile({
+    required Color gradientColor1,
+    required Color gradientColor2,
+    required String title,
+    required String subtitle,
+    SvgPicture? svgIcon,
+    Icon? icon,
+    required TextTheme textTheme,
+    required Function() onTap,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            gradientColor1,
+            gradientColor2,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: ListTile(
+        title: Text(
+          title,
+          style: textTheme.bodyLarge!.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text(
+          subtitle,
+          style: textTheme.bodyMedium!.copyWith(color: Colors.white),
+        ),
+        leading: icon ?? svgIcon,
+        onTap: onTap,
       ),
     );
   }

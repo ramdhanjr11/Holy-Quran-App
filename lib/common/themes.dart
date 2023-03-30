@@ -35,3 +35,6 @@ Color appLightOrangeColor = const Color(0xffF9B091);
 Color appLightYellowColor = const Color(0xffFFD08A);
 Color appLightGreyColor = const Color(0xff8789A3);
 Color appLightPrimaryTextColor = const Color(0xff240F4F);
+Color appLightGreenMenuColor = const Color(0xff61EAA0);
+Color appLightPurpleMenuColor = appLightSecondaryColor;
+Color appLightBlueMenuColor = const Color(0xff54DAF5);
