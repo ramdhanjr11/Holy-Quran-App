@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
 
 class SurahPage extends StatefulWidget {
@@ -18,46 +19,81 @@ class _SurahPageState extends State<SurahPage> {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            'Surah',
-            style: textTheme.titleLarge!.copyWith(
-              color: appLightPrimaryColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: false,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.grey,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                color: Colors.grey,
-                size: 30,
+      backgroundColor: Colors.white,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            floating: true,
+            snap: true,
+            title: Text(
+              'Surah',
+              style: textTheme.titleLarge!.copyWith(
+                color: appLightPrimaryColor,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ],
-        ),
+            centerTitle: false,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.search,
+                  color: Colors.grey,
+                  size: 30,
+                ),
+              ),
+            ],
+          ),
+        ],
+        physics: const BouncingScrollPhysics(),
         body: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(height: 16),
               _buildQuoteBanner(context),
+              ListView.separated(
+                shrinkWrap: true,
+                primary: false,
+                itemBuilder: (context, index) => _buildSurahTile(),
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: 15,
+              ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  ListTile _buildSurahTile() {
+    return ListTile(
+      leading: Stack(
+        alignment: Alignment.center,
+        children: [
+          SvgPicture.asset('assets/number_icon.svg'),
+          const Positioned(
+            child: Text('1'),
+          ),
+        ],
+      ),
+      title: const Text('Al-Fatihah'),
+      subtitle: const Text('Meccan : 7 VERSES'),
+      trailing: Text(
+        'ةحتافلا',
+        style: TextStyle(fontSize: 24, color: appLightPrimaryColor),
+      ),
+    );
   }
 
   _buildQuoteBanner(BuildContext context) {
