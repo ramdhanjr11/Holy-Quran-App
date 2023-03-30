@@ -43,150 +43,153 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Assalamualaikum',
-                style: textTheme.titleLarge!.copyWith(
-                  color: appLightGreyColor,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'M Ramdhan Syahputra',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: textTheme.headlineSmall!.copyWith(
-                  color: appLightPrimaryTextColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                height: MediaQuery.of(context).size.height * .2,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      appLightPurpleColor,
-                      appLightPrimaryColor,
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomCenter,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Assalamualaikum',
+                  style: textTheme.titleLarge!.copyWith(
+                    color: appLightGreyColor,
                   ),
-                  borderRadius: BorderRadius.circular(20),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Positioned(
-                        bottom: -20,
-                        right: -20,
-                        child: SvgPicture.asset(
-                          'assets/quran_item.svg',
-                          height: 115,
+                const SizedBox(height: 4),
+                Text(
+                  'M Ramdhan Syahputra',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.headlineSmall!.copyWith(
+                    color: appLightPrimaryTextColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  height: MediaQuery.of(context).size.height * .2,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        appLightPurpleColor,
+                        appLightPrimaryColor,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Positioned(
+                          bottom: -20,
+                          right: -20,
+                          child: SvgPicture.asset(
+                            'assets/quran_item.svg',
+                            height: 115,
+                          ),
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/book_icon.svg',
-                                color: Colors.white,
-                                height: 20,
-                              ),
-                              const SizedBox(width: 6),
-                              Text(
-                                'Last Read',
-                                style: textTheme.bodyMedium!.copyWith(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/book_icon.svg',
                                   color: Colors.white,
+                                  height: 20,
                                 ),
-                              )
-                            ],
-                          ),
-                          const Spacer(),
-                          Text(
-                            'Al-Fatiah',
-                            style: textTheme.bodyLarge!.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Last Read',
+                                  style: textTheme.bodyMedium!.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Ayah No: 1',
-                            style: textTheme.bodyMedium!.copyWith(
-                              color: Colors.white,
+                            const Spacer(),
+                            Text(
+                              'Al-Fatiah',
+                              style: textTheme.bodyLarge!.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                            const SizedBox(height: 8),
+                            Text(
+                              'Ayah No: 1',
+                              style: textTheme.bodyMedium!.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 32),
-              Text(
-                'Menu',
-                style: textTheme.titleLarge!
-                    .copyWith(color: appLightPrimaryTextColor),
-              ),
-              const SizedBox(height: 24),
-              _buildMenuTile(
-                gradientColor1: appLightGreenMenuColor,
-                gradientColor2: appLightPurpleMenuColor,
-                title: 'Read Qur\'an',
-                subtitle: 'Menu 1',
-                textTheme: textTheme,
-                svgIcon: SvgPicture.asset(
-                  'assets/quran_icon.svg',
-                  color: Colors.white,
-                  alignment: Alignment.center,
+                const SizedBox(height: 32),
+                Text(
+                  'Menu',
+                  style: textTheme.titleLarge!
+                      .copyWith(color: appLightPrimaryTextColor),
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, SurahPage.routeName);
-                },
-              ),
-              const SizedBox(height: 16),
-              _buildMenuTile(
-                gradientColor1: appLightBlueMenuColor,
-                gradientColor2: appLightPurpleMenuColor,
-                title: 'Sholat Time',
-                subtitle: 'Menu 2',
-                textTheme: textTheme,
-                svgIcon: SvgPicture.asset(
-                  'assets/prayer_man_icon.svg',
-                  color: Colors.white,
-                  alignment: Alignment.center,
+                const SizedBox(height: 24),
+                _buildMenuTile(
+                  gradientColor1: appLightGreenMenuColor,
+                  gradientColor2: appLightPurpleMenuColor,
+                  title: 'Read Qur\'an',
+                  subtitle: 'Menu 1',
+                  textTheme: textTheme,
+                  svgIcon: SvgPicture.asset(
+                    'assets/quran_icon.svg',
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, SurahPage.routeName);
+                  },
                 ),
-                onTap: () {},
-              ),
-              const SizedBox(height: 16),
-              _buildMenuTile(
-                gradientColor1: appLightOrangeColor,
-                gradientColor2: appLightPurpleMenuColor,
-                title: 'Saved Ayah',
-                subtitle: 'Menu 3',
-                textTheme: textTheme,
-                icon: const Icon(
-                  Icons.bookmark_outline,
-                  color: Colors.white,
-                  size: 30,
+                const SizedBox(height: 16),
+                _buildMenuTile(
+                  gradientColor1: appLightBlueMenuColor,
+                  gradientColor2: appLightPurpleMenuColor,
+                  title: 'Sholat Time',
+                  subtitle: 'Menu 2',
+                  textTheme: textTheme,
+                  svgIcon: SvgPicture.asset(
+                    'assets/prayer_man_icon.svg',
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                  ),
+                  onTap: () {},
                 ),
-                onTap: () {},
-              ),
-              const Spacer(),
-              Text(
-                'Ramdhan\'s created ©',
-                style: textTheme.bodySmall!.copyWith(
-                  fontStyle: FontStyle.italic,
+                const SizedBox(height: 16),
+                _buildMenuTile(
+                  gradientColor1: appLightOrangeColor,
+                  gradientColor2: appLightPurpleMenuColor,
+                  title: 'Saved Ayah',
+                  subtitle: 'Menu 3',
+                  textTheme: textTheme,
+                  icon: const Icon(
+                    Icons.bookmark_outline,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onTap: () {},
                 ),
-              )
-            ],
+                // const Spacer(),
+                // Text(
+                //   'Ramdhan\'s created ©',
+                //   style: textTheme.bodySmall!.copyWith(
+                //     fontStyle: FontStyle.italic,
+                //   ),
+                // )
+              ],
+            ),
           ),
         ),
       ),

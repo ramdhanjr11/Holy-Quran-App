@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
+import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
 
 class SurahPage extends StatefulWidget {
   static const routeName = '/surah_page';
@@ -65,7 +66,16 @@ class _SurahPageState extends State<SurahPage> {
               ListView.separated(
                 shrinkWrap: true,
                 primary: false,
-                itemBuilder: (context, index) => _buildSurahTile(),
+                itemBuilder: (context, index) => _buildSurahTile(
+                  surahNumber: index.toString(),
+                  surahLatinName: "Al-Fatihah",
+                  surahName: "ةحتافلا",
+                  surahSubtitle: "Meccan : 7 VERSES",
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    SurahDetailPage.routeName,
+                  ),
+                ),
                 separatorBuilder: (context, index) => const Divider(),
                 itemCount: 15,
               ),
@@ -76,23 +86,30 @@ class _SurahPageState extends State<SurahPage> {
     );
   }
 
-  ListTile _buildSurahTile() {
+  ListTile _buildSurahTile({
+    required String surahNumber,
+    required String surahLatinName,
+    required String surahName,
+    required String surahSubtitle,
+    required Function() onTap,
+  }) {
     return ListTile(
       leading: Stack(
         alignment: Alignment.center,
         children: [
           SvgPicture.asset('assets/number_icon.svg'),
-          const Positioned(
-            child: Text('1'),
+          Positioned(
+            child: Text(surahNumber),
           ),
         ],
       ),
-      title: const Text('Al-Fatihah'),
-      subtitle: const Text('Meccan : 7 VERSES'),
+      title: Text(surahLatinName),
+      subtitle: Text(surahSubtitle),
       trailing: Text(
-        'ةحتافلا',
+        surahName,
         style: TextStyle(fontSize: 24, color: appLightPrimaryColor),
       ),
+      onTap: onTap,
     );
   }
 

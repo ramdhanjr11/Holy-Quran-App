@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/presentation/ui/home_page.dart';
 import 'package:holy_quran_app/presentation/ui/onboarding_page.dart';
+import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
 import 'package:holy_quran_app/presentation/ui/surah_page.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         OnBoardingPage.routeName: (_) => const OnBoardingPage(),
         HomePage.routeName: (_) => const HomePage(),
         SurahPage.routeName: (_) => const SurahPage(),
+        SurahDetailPage.routeName: (_) => const SurahDetailPage(),
       },
     );
   }
