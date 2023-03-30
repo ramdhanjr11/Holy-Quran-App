@@ -176,6 +176,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {},
               ),
+              const Spacer(),
+              Text(
+                'Ramdhan\'s created ©',
+                style: textTheme.bodySmall!.copyWith(
+                  fontStyle: FontStyle.italic,
+                ),
+              )
             ],
           ),
         ),
