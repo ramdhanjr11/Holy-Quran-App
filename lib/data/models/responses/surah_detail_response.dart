@@ -7,6 +7,7 @@ import 'package:holy_quran_app/data/models/surah_detail_model.dart';
 
 class SurahDetailResponse extends Equatable {
   final SurahDetailModel surahDetailModel;
+  
   const SurahDetailResponse({
     required this.surahDetailModel,
   });

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:holy_quran_app/common/constans.dart';
+import 'package:holy_quran_app/common/constants.dart';
 import 'package:holy_quran_app/common/exceptions.dart';
 import 'package:holy_quran_app/data/models/responses/surah_detail_response.dart';
 import 'package:holy_quran_app/data/models/surah_detail_model.dart';

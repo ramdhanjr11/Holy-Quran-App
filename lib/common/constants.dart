@@ -1,1 +1,1 @@
-const quranBaseUrl = 'https://equran.id/api/surat/';
+const quranBaseUrl = 'https://equran.id/api/surat';

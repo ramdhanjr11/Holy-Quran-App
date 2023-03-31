@@ -32,6 +32,5 @@ class SurahResponse extends Equatable {
       SurahResponse.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [surahList];
 }
