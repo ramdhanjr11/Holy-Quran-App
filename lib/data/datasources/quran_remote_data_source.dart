@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:holy_quran_app/common/constants.dart';
 import 'package:holy_quran_app/common/exceptions.dart';
 import 'package:holy_quran_app/data/models/responses/surah_detail_response.dart';
@@ -23,7 +21,7 @@ class QuranRemoteDataSourceImpl extends QuranRemoteDataSource {
     var response = await http.get(Uri.parse(quranBaseUrl));
     var result = response.body;
     if (response.statusCode == 200) {
-      return SurahResponse.fromJson(json.decode(result)).surahList;
+      return SurahResponse.fromJson(result).surahList;
     } else {
       throw ServerException();
     }

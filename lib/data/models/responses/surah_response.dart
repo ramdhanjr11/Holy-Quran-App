@@ -16,10 +16,10 @@ class SurahResponse extends Equatable {
     };
   }
 
-  factory SurahResponse.fromMap(Map<String, dynamic> map) {
+  factory SurahResponse.fromMap(List<dynamic> map) {
     return SurahResponse(
       surahList: List<SurahModel>.from(
-        (map as List<Map<String, dynamic>>).map<SurahModel>(
+        map.map<SurahModel>(
           (x) => SurahModel.fromMap(x),
         ),
       ),
@@ -29,7 +29,7 @@ class SurahResponse extends Equatable {
   String toJson() => json.encode(toMap());
 
   factory SurahResponse.fromJson(String source) =>
-      SurahResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+      SurahResponse.fromMap(json.decode(source) as List<dynamic>);
 
   @override
   List<Object?> get props => [surahList];

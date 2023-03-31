@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
+import 'package:holy_quran_app/presentation/blocs/quran_bloc/quran_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
 
 class SurahPage extends StatefulWidget {
@@ -15,6 +17,12 @@ class SurahPage extends StatefulWidget {
 }
 
 class _SurahPageState extends State<SurahPage> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<QuranBloc>(context).add(GetAllSurahEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -58,29 +66,55 @@ class _SurahPageState extends State<SurahPage> {
           ),
         ],
         physics: const BouncingScrollPhysics(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 16),
-              _buildQuoteBanner(context),
-              ListView.separated(
-                shrinkWrap: true,
-                primary: false,
-                itemBuilder: (context, index) => _buildSurahTile(
-                  surahNumber: index.toString(),
-                  surahLatinName: "Al-Fatihah",
-                  surahName: "ةحتافلا",
-                  surahSubtitle: "Meccan : 7 VERSES",
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    SurahDetailPage.routeName,
-                  ),
+        body: BlocBuilder<QuranBloc, QuranState>(
+          builder: (context, state) {
+            if (state is QuranLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is QuranError) {
+              return Center(
+                child: Text(
+                  state.message,
+                  textAlign: TextAlign.center,
                 ),
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: 15,
-              ),
-            ],
-          ),
+              );
+            } else if (state is QuranSurahLoaded) {
+              final surahList = state.surahList;
+
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    _buildQuoteBanner(context),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemBuilder: (context, index) {
+                        final surah = surahList[index];
+                        return _buildSurahTile(
+                          surahNumber: surah.number.toString(),
+                          surahLatinName: surah.latinName,
+                          surahName: surah.name,
+                          surahSubtitle: "${surah.type} : ${surah.totalAyah}",
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            SurahDetailPage.routeName,
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemCount: surahList.length,
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return const Center(
+                child: Text('Oops someting went wrong..'),
+              );
+            }
+          },
         ),
       ),
     );

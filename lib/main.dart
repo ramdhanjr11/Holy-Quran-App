@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran_app/common/themes.dart';
+import 'package:holy_quran_app/presentation/blocs/quran_bloc/quran_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/home_page.dart';
 import 'package:holy_quran_app/presentation/ui/onboarding_page.dart';
 import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
@@ -19,7 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: const [],
+      providers: [
+        BlocProvider<QuranBloc>(
+          create: (context) => di.locator(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Holy Quran App',
