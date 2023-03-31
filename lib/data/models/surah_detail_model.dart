@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 import 'package:holy_quran_app/data/models/ayah_model.dart';
+import 'package:holy_quran_app/domain/entities/surah_detail.dart';
 
 class SurahDetailModel extends Equatable {
   final int number;
@@ -64,6 +65,18 @@ class SurahDetailModel extends Equatable {
 
   factory SurahDetailModel.fromJson(String source) =>
       SurahDetailModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  SurahDetail toEntity() => SurahDetail(
+        number: number,
+        name: name,
+        latinName: latinName,
+        totalAyah: totalAyah,
+        type: type,
+        means: means,
+        description: description,
+        audio: audio,
+        surahAyah: surahAyah.map((ayah) => ayah.toEntity()).toList(),
+      );
 
   @override
   List<Object?> get props => [

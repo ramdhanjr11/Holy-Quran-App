@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:holy_quran_app/domain/entities/ayah.dart';
 
 class AyahModel extends Equatable {
   final int id;
@@ -44,6 +45,15 @@ class AyahModel extends Equatable {
 
   factory AyahModel.fromJson(String source) =>
       AyahModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Ayah toEntity() => Ayah(
+        id: id,
+        surah: surah,
+        number: number,
+        arab: arab,
+        translate: translate,
+        indonesia: indonesia,
+      );
 
   @override
   List<Object?> get props => [id, surah, number, arab, translate, indonesia];
