@@ -2,10 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/surah_page_widgets/search_surah_widget.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/surah_page_widgets/surah_tile_widget.dart';
 
 class SurahPage extends StatefulWidget {
   static const routeName = '/surah_page';
@@ -55,7 +56,9 @@ class _SurahPageState extends State<SurahPage> {
             elevation: 0,
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showSearch(context: context, delegate: SearchSurah());
+                },
                 icon: const Icon(
                   Icons.search,
                   color: Colors.grey,
@@ -81,7 +84,6 @@ class _SurahPageState extends State<SurahPage> {
               );
             } else if (state is SurahLoaded) {
               final surahList = state.surahList;
-
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -92,7 +94,7 @@ class _SurahPageState extends State<SurahPage> {
                       primary: false,
                       itemBuilder: (context, index) {
                         final surah = surahList[index];
-                        return _buildSurahTile(
+                        return SurahTile(
                           surahNumber: surah.number.toString(),
                           surahLatinName: surah.latinName,
                           surahName: surah.name,
@@ -120,33 +122,6 @@ class _SurahPageState extends State<SurahPage> {
           },
         ),
       ),
-    );
-  }
-
-  ListTile _buildSurahTile({
-    required String surahNumber,
-    required String surahLatinName,
-    required String surahName,
-    required String surahSubtitle,
-    required Function() onTap,
-  }) {
-    return ListTile(
-      leading: Stack(
-        alignment: Alignment.center,
-        children: [
-          SvgPicture.asset('assets/number_icon.svg'),
-          Positioned(
-            child: Text(surahNumber),
-          ),
-        ],
-      ),
-      title: Text(surahLatinName),
-      subtitle: Text(surahSubtitle),
-      trailing: Text(
-        surahName,
-        style: TextStyle(fontSize: 24, color: appLightPrimaryColor),
-      ),
-      onTap: onTap,
     );
   }
 
