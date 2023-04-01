@@ -45,16 +45,16 @@ class SurahDetailModel extends Equatable {
 
   factory SurahDetailModel.fromMap(Map<String, dynamic> map) {
     return SurahDetailModel(
-      number: map['number'] as int,
-      name: map['name'] as String,
-      latinName: map['latinName'] as String,
-      totalAyah: map['totalAyah'] as int,
-      type: map['type'] as String,
-      means: map['means'] as String,
-      description: map['description'] as String,
+      number: map['nomor'] as int,
+      name: map['nama'] as String,
+      latinName: map['nama_latin'] as String,
+      totalAyah: map['jumlah_ayat'] as int,
+      type: map['tempat_turun'] as String,
+      means: map['arti'] as String,
+      description: map['deskripsi'] as String,
       audio: map['audio'] as String,
       surahAyah: List<AyahModel>.from(
-        (map['surahAyah'] as List<int>).map<AyahModel>(
+        (map['ayat'] as List).map<AyahModel>(
           (x) => AyahModel.fromMap(x as Map<String, dynamic>),
         ),
       ),

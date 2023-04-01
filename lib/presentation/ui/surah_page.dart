@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
-import 'package:holy_quran_app/presentation/blocs/quran_bloc/quran_bloc.dart';
+import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
 
 class SurahPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class _SurahPageState extends State<SurahPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<QuranBloc>(context).add(GetAllSurahEvent());
+    BlocProvider.of<SurahBloc>(context).add(GetSurahEvent());
   }
 
   @override
@@ -66,20 +66,20 @@ class _SurahPageState extends State<SurahPage> {
           ),
         ],
         physics: const BouncingScrollPhysics(),
-        body: BlocBuilder<QuranBloc, QuranState>(
+        body: BlocBuilder<SurahBloc, SurahState>(
           builder: (context, state) {
-            if (state is QuranLoading) {
+            if (state is SurahLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is QuranError) {
+            } else if (state is SurahError) {
               return Center(
                 child: Text(
                   state.message,
                   textAlign: TextAlign.center,
                 ),
               );
-            } else if (state is QuranSurahLoaded) {
+            } else if (state is SurahLoaded) {
               final surahList = state.surahList;
 
               return SingleChildScrollView(
@@ -97,9 +97,12 @@ class _SurahPageState extends State<SurahPage> {
                           surahLatinName: surah.latinName,
                           surahName: surah.name,
                           surahSubtitle: "${surah.type} : ${surah.totalAyah}",
-                          onTap: () => Navigator.pushNamed(
+                          onTap: () => Navigator.push(
                             context,
-                            SurahDetailPage.routeName,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  SurahDetailPage(id: surah.number),
+                            ),
                           ),
                         );
                       },
