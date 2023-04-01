@@ -57,7 +57,7 @@ class SearchSurah extends SearchDelegate {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SurahDetailPage(id: surah.number),
+                    builder: (context) => SurahDetailPage(surah: surah),
                   ),
                 ),
               );

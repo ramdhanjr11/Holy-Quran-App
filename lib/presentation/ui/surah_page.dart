@@ -103,7 +103,7 @@ class _SurahPageState extends State<SurahPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  SurahDetailPage(id: surah.number),
+                                  SurahDetailPage(surah: surah),
                             ),
                           ),
                         );
