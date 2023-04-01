@@ -7,6 +7,7 @@ import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/domain/entities/surah_detail.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_detail_bloc/surah_detail_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SurahDetailPage extends StatefulWidget {
   static const routeName = '/surah_detail_page';
@@ -35,6 +36,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    late SurahDetail surahDetail;
     late List<Ayah> ayah;
 
     return Scaffold(
@@ -55,7 +57,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                 child: Text(state.message),
               );
             } else if (state is SurahDetailLoaded) {
-              final surahDetail = state.surahDetail;
+              surahDetail = state.surahDetail;
               ayah = surahDetail.surahAyah;
               return SingleChildScrollView(
                 child: Column(
@@ -67,9 +69,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                       shrinkWrap: true,
                       itemCount: surahDetail.totalAyah,
                       itemBuilder: (context, index) => _buildItemAyah(context,
-                          ayahNumber: ayah[index].number.toString(),
-                          ayah: ayah[index].arab,
-                          translate: ayah[index].indonesia),
+                          ayah: ayah[index], surahDetail: surahDetail),
                       itemScrollController: itemScrollController,
                       itemPositionsListener: itemPositionsListener,
                     )
@@ -265,9 +265,8 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
 
   Widget _buildItemAyah(
     BuildContext context, {
-    required String ayahNumber,
-    required String ayah,
-    required String translate,
+    required Ayah ayah,
+    required SurahDetail surahDetail,
   }) {
     final textTheme = Theme.of(context).textTheme;
     return Column(
@@ -293,7 +292,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                 ),
                 child: Center(
                   child: Text(
-                    ayahNumber,
+                    ayah.number.toString(),
                     style: textTheme.titleSmall!.copyWith(color: Colors.white),
                   ),
                 ),
@@ -301,7 +300,10 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      Share.share(
+                          'Dont forget to recite ${surahDetail.latinName} : ${ayah.number}');
+                    },
                     icon: Icon(
                       Icons.share_outlined,
                       color: appLightPrimaryColor,
@@ -335,7 +337,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Text(
-            ayah,
+            ayah.arab,
             style: TextStyle(
               fontSize: 24,
               color: appLightPrimaryTextColor,
@@ -346,7 +348,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Text(
-            translate,
+            ayah.indonesia,
             style:
                 textTheme.bodyLarge!.copyWith(color: appLightPrimaryTextColor),
           ),
