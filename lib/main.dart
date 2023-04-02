@@ -8,6 +8,7 @@ import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_detail_bloc/surah_detail_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/home_page.dart';
 import 'package:holy_quran_app/presentation/ui/onboarding_page.dart';
+import 'package:holy_quran_app/presentation/ui/sholat_time_page.dart';
 import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
 import 'package:holy_quran_app/presentation/ui/surah_page.dart';
 import 'injection.dart' as di;
@@ -61,6 +62,10 @@ class MyApp extends StatelessWidget {
               final arg = settings.arguments as Surah;
               return MaterialPageRoute(
                 builder: (context) => SurahDetailPage(surah: arg),
+              );
+            case SholatTimePage.routeName:
+              return MaterialPageRoute(
+                builder: (context) => const SholatTimePage(),
               );
             default:
               return MaterialPageRoute(builder: (_) {
