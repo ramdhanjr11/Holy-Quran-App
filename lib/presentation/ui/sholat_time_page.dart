@@ -7,6 +7,7 @@ import 'package:flutter_timeline_calendar/timeline/utils/calendar_types.dart';
 import 'package:flutter_timeline_calendar/timeline/widget/timeline_calendar.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/presentation/blocs/sholat_time_bloc/sholat_time_bloc.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/sholat_time_page_widgets/sholat_time_tile_widget.dart';
 
 class SholatTimePage extends StatefulWidget {
   static const routeName = '/sholat_time_page';
@@ -108,9 +109,7 @@ class _SholatTimePageState extends State<SholatTimePage> {
                       child: Text(state.message),
                     );
                   } else if (state is SholatTimeLoaded) {
-                    return Center(
-                      child: Text(state.sholatTime.date),
-                    );
+                    return SholatTimeTile(sholatTime: state.sholatTime);
                   } else {
                     return const Center(
                       child: Text('Oopss someting went wrong...'),
