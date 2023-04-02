@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:holy_quran_app/data/datasources/ayah_local_data_source.dart';
+import 'package:holy_quran_app/data/datasources/db/db_helper.dart';
 import 'package:holy_quran_app/data/datasources/quran_remote_data_source.dart';
 import 'package:holy_quran_app/data/datasources/sholat_time_remote_data_source.dart';
 import 'package:holy_quran_app/data/repositories/quran_repository_impl.dart';
@@ -30,10 +32,17 @@ void init() {
     ),
   );
 
+  locator.registerLazySingleton<AyahLocalDataSource>(
+    () => AyahLocalDataSourceImpl(
+      locator(),
+    ),
+  );
+
   // repository
   locator.registerLazySingleton<QuranRepository>(
     () => QuranRepositoryImpl(
       remoteDataSource: locator(),
+      ayahLocalDataSource: locator(),
     ),
   );
 
@@ -75,4 +84,5 @@ void init() {
 
   // external
   locator.registerLazySingleton<http.Client>(() => http.Client());
+  locator.registerLazySingleton<DbHelper>(() => DbHelper());
 }
