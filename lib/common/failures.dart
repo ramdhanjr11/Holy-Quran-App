@@ -12,3 +12,7 @@ class Failure extends Equatable {
 class ServerFailure extends Failure {
   ServerFailure(super.message);
 }
+
+class DatabaseFailure extends Failure {
+  DatabaseFailure(super.message);
+}
