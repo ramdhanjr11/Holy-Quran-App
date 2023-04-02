@@ -38,7 +38,7 @@ class QuranRepositoryImpl implements QuranRepository {
   }
 
   @override
-  Future<Either<Failure, List<Ayah>>> getAllAyahSaved() async {
+  Future<Either<Failure, List<Ayah>>> getAllSavedAyah() async {
     try {
       var result = await ayahLocalDataSource.getAllAyah();
       return Right(result.map((data) => data.toEntity()).toList());
