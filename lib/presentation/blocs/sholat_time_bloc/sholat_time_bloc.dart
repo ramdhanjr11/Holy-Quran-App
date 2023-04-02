@@ -15,6 +15,7 @@ class SholatTimeBloc extends Bloc<SholatTimeEvent, SholatTimeState> {
 
       final result = await getSholatTime.execute(event.date);
       result.fold((failure) {
+        print(failure.message);
         emit(SholatTimeError(failure.message));
       }, (data) {
         emit(SholatTimeLoaded(sholatTime: data));

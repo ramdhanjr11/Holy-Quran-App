@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:holy_quran_app/data/models/sholat_time_model.dart';
 
 class SholatTimeResponse extends Equatable {
-  final String status;
+  final bool status;
   final SholatTimeModel jadwal;
 
   const SholatTimeResponse({
@@ -15,7 +15,7 @@ class SholatTimeResponse extends Equatable {
   factory SholatTimeResponse.fromJson(Map<String, dynamic> json) =>
       SholatTimeResponse(
         status: json['status'],
-        jadwal: json['data']['jadwal'],
+        jadwal: SholatTimeModel.fromJson(json['data']['jadwal']),
       );
 
   @override

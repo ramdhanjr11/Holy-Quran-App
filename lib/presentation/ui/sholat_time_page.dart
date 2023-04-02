@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_timeline_calendar/timeline/model/calendar_options.dart';
 import 'package:flutter_timeline_calendar/timeline/model/day_options.dart';
 import 'package:flutter_timeline_calendar/timeline/model/headers_options.dart';
 import 'package:flutter_timeline_calendar/timeline/utils/calendar_types.dart';
 import 'package:flutter_timeline_calendar/timeline/widget/timeline_calendar.dart';
 import 'package:holy_quran_app/common/themes.dart';
+import 'package:holy_quran_app/presentation/blocs/sholat_time_bloc/sholat_time_bloc.dart';
 
 class SholatTimePage extends StatefulWidget {
   static const routeName = '/sholat_time_page';
@@ -21,7 +23,16 @@ class _SholatTimePageState extends State<SholatTimePage> {
   void _setDateTime(DateTime date) {
     setState(() {
       dateSelected = date;
+      context
+          .read<SholatTimeBloc>()
+          .add(GetSholatTimeEvent(date: dateSelected));
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<SholatTimeBloc>().add(GetSholatTimeEvent(date: dateSelected));
   }
 
   @override
@@ -86,6 +97,27 @@ class _SholatTimePageState extends State<SholatTimePage> {
                 },
               ),
               const SizedBox(height: 32),
+              BlocBuilder<SholatTimeBloc, SholatTimeState>(
+                builder: (context, state) {
+                  if (state is SholatTimeLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is SholatTimeError) {
+                    return Center(
+                      child: Text(state.message),
+                    );
+                  } else if (state is SholatTimeLoaded) {
+                    return Center(
+                      child: Text(state.sholatTime.date),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('Oopss someting went wrong...'),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),

@@ -38,7 +38,7 @@ class SholatTimeModel extends Equatable {
         ashar: json['ashar'],
         maghrib: json['maghrib'],
         isya: json['isya'],
-        date: json['data'],
+        date: json['date'],
       );
 
   SholatTime toEntity() => SholatTime(
