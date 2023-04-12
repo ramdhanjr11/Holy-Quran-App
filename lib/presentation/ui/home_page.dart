@@ -22,7 +22,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        iconTheme: IconThemeData(color: appLightPrimaryColor, size: 30),
         backgroundColor: Colors.white,
         centerTitle: false,
         elevation: 0,
@@ -33,14 +34,19 @@ class _HomePageState extends State<HomePage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.settings,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: const Text('M Ramdhan Syahputra'),
+              accountEmail: const Text('ramdhanjr690@gmail.com'),
+              decoration: BoxDecoration(
                 color: appLightPrimaryColor,
-              ))
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

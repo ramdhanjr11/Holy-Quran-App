@@ -46,6 +46,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
           _buildSliverAppBar(textTheme, context),
         ],
         physics: const BouncingScrollPhysics(),
+        floatHeaderSlivers: true,
         body: BlocBuilder<SurahDetailBloc, SurahDetailState>(
           builder: (context, state) {
             if (state is SurahDetailLoading) {
@@ -59,22 +60,11 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
             } else if (state is SurahDetailLoaded) {
               surahDetail = state.surahDetail;
               ayah = surahDetail.surahAyah;
-              return Column(
-                children: [
-                  const SizedBox(height: 16),
-                  _buildSurahBanner(context, surahDetail, textTheme),
-                  const SizedBox(height: 32),
-                  Expanded(
-                    child: ScrollablePositionedList.builder(
-                      shrinkWrap: true,
-                      itemCount: surahDetail.totalAyah,
-                      itemBuilder: (context, index) =>
-                          AyahItem(ayah: ayah[index]),
-                      itemScrollController: itemScrollController,
-                      itemPositionsListener: itemPositionsListener,
-                    ),
-                  )
-                ],
+              return ScrollablePositionedList.builder(
+                itemCount: surahDetail.totalAyah,
+                itemBuilder: (context, index) => AyahItem(ayah: ayah[index]),
+                itemScrollController: itemScrollController,
+                itemPositionsListener: itemPositionsListener,
               );
             } else {
               return const Center(
@@ -166,6 +156,126 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
     );
   }
 
+  _buildInfoSurahDialog(BuildContext context, TextTheme textTheme) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return BlocBuilder<SurahDetailBloc, SurahDetailState>(
+            builder: (context, state) {
+              if (state is SurahDetailLoading) {
+                return const Dialog(
+                  child: SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              } else if (state is SurahDetailError) {
+                return Dialog(
+                  child: SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: Center(
+                      child: Text(state.message),
+                    ),
+                  ),
+                );
+              } else if (state is SurahDetailLoaded) {
+                final surahDetail = state.surahDetail;
+                return Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * .35,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * .9,
+                          height: MediaQuery.of(context).size.height * .35,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                appLightPurpleColor,
+                                appLightPrimaryColor,
+                              ],
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x19000000),
+                                blurRadius: 24,
+                                offset: Offset(0, 20),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 30,
+                          child: Opacity(
+                            opacity: .1,
+                            child: SvgPicture.asset(
+                              'assets/quran_item.svg',
+                              width: 300,
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                surahDetail.latinName,
+                                style: textTheme.headlineMedium!.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                surahDetail.means,
+                                style: textTheme.headlineSmall!
+                                    .copyWith(color: Colors.white),
+                              ),
+                              const SizedBox(height: 12),
+                              const SizedBox(
+                                width: 250,
+                                child: Divider(
+                                  height: 4,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                '${surahDetail.type} : ${surahDetail.totalAyah}',
+                                style: textTheme.titleMedium!
+                                    .copyWith(color: Colors.white),
+                              ),
+                              const SizedBox(height: 32),
+                              SvgPicture.asset(
+                                'assets/basmallah_item.svg',
+                                width: 260,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return const Center(
+                  child: Text('Oops something went wrong, try again later..'),
+                );
+              }
+            },
+          );
+        });
+  }
+
   SliverAppBar _buildSliverAppBar(
     TextTheme textTheme,
     BuildContext context,
@@ -195,10 +305,20 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
       actions: [
         IconButton(
           onPressed: () {
-            _buildShowDialog(context, textTheme);
+            _buildSearchDialog(context, textTheme);
           },
           icon: const Icon(
             Icons.search,
+            color: Colors.grey,
+            size: 30,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            _buildInfoSurahDialog(context, textTheme);
+          },
+          icon: const Icon(
+            Icons.info,
             color: Colors.grey,
             size: 30,
           ),
@@ -207,7 +327,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
     );
   }
 
-  Future<dynamic> _buildShowDialog(
+  Future<dynamic> _buildSearchDialog(
     BuildContext context,
     TextTheme textTheme,
   ) {
