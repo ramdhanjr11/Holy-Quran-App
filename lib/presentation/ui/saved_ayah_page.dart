@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/ayah_item_widget.dart';
 
 class SavedAyahPage extends StatefulWidget {
   static const routeName = '/saved_ayah_page';
@@ -58,8 +59,7 @@ class _SavedAyahPageState extends State<SavedAyahPage> {
               ),
             );
           } else if (state is AyahLoaded) {
-            return ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
+            return ListView.builder(
               itemBuilder: (context, index) {
                 final ayah = state.ayahList[index];
                 return Dismissible(
@@ -79,16 +79,7 @@ class _SavedAyahPageState extends State<SavedAyahPage> {
                       ),
                     ),
                   ),
-                  child: ListTile(
-                    title: Text(
-                      ayah.arab,
-                      textAlign: TextAlign.end,
-                    ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Text(ayah.indonesia),
-                    ),
-                  ),
+                  child: AyahItem(ayah: ayah),
                 );
               },
               itemCount: state.ayahList.length,

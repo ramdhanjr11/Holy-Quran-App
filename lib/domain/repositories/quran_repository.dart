@@ -10,4 +10,5 @@ abstract class QuranRepository {
   Future<Either<Failure, List<Ayah>>> getAllSavedAyah();
   Future<Either<Failure, int>> insertAyah(Ayah ayah);
   Future<Either<Failure, int>> removeAyah(int id);
+  Future<Either<Failure, List<Ayah>>> getAllSavedAyahBySurahId(int surahId);
 }
