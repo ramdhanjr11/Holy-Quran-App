@@ -62,4 +62,11 @@ class DbHelper {
     var result = await db!.query(_tbAyah);
     return result.map((data) => AyahTable.fromJson(data)).toList();
   }
+
+  Future<List<AyahTable>> getAllAyahBySurahId(int surahId) async {
+    var db = await database;
+    var result =
+        await db!.query(_tbAyah, where: 'surah = ?', whereArgs: [surahId]);
+    return result.map((data) => AyahTable.fromJson(data)).toList();
+  }
 }
