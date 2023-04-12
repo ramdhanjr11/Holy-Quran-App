@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran_app/common/constants.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
+import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/search_surah_bloc/search_surah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/sholat_time_bloc/sholat_time_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_detail_bloc/surah_detail_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/home_page.dart';
 import 'package:holy_quran_app/presentation/ui/onboarding_page.dart';
+import 'package:holy_quran_app/presentation/ui/saved_ayah_page.dart';
 import 'package:holy_quran_app/presentation/ui/sholat_time_page.dart';
 import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
 import 'package:holy_quran_app/presentation/ui/surah_page.dart';
@@ -37,6 +39,9 @@ class MyApp extends StatelessWidget {
           create: (context) => di.locator(),
         ),
         BlocProvider<SholatTimeBloc>(
+          create: (context) => di.locator(),
+        ),
+        BlocProvider<AyahBloc>(
           create: (context) => di.locator(),
         ),
       ],
@@ -70,6 +75,10 @@ class MyApp extends StatelessWidget {
             case SholatTimePage.routeName:
               return MaterialPageRoute(
                 builder: (context) => const SholatTimePage(),
+              );
+            case SavedAyahPage.routeName:
+              return MaterialPageRoute(
+                builder: (context) => const SavedAyahPage(),
               );
             default:
               return MaterialPageRoute(builder: (_) {

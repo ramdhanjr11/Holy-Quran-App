@@ -24,7 +24,7 @@ class DbHelper {
     final databasePath = await getDatabasesPath();
     final path = join(databasePath, "ayah_db.db");
 
-    var db = await openDatabase(path, onCreate: _onCreate);
+    var db = await openDatabase(path, version: 1, onCreate: _onCreate);
     return db;
   }
 
@@ -37,15 +37,13 @@ class DbHelper {
   static const String _columnIndonesia = 'indonesia';
 
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute('''
-        create table $_tbAyah (
+    await db.execute('''create table $_tbAyah (
           $_columnIdAyah integer primary key,
           $_columnSurahAyah integer not null,
           $_columnNumberAyah integer not null,
           $_columnArabAyah text not null,
           $_columnTranslateAyah text not null,
-          $_columnIndonesia text not null,
-        )
+          $_columnIndonesia text not null)
       ''');
   }
 
