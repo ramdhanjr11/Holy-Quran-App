@@ -59,22 +59,22 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
             } else if (state is SurahDetailLoaded) {
               surahDetail = state.surahDetail;
               ayah = surahDetail.surahAyah;
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    _buildSurahBanner(context, surahDetail, textTheme),
-                    const SizedBox(height: 32),
-                    ScrollablePositionedList.builder(
+              return Column(
+                children: [
+                  const SizedBox(height: 16),
+                  _buildSurahBanner(context, surahDetail, textTheme),
+                  const SizedBox(height: 32),
+                  Expanded(
+                    child: ScrollablePositionedList.builder(
                       shrinkWrap: true,
                       itemCount: surahDetail.totalAyah,
                       itemBuilder: (context, index) =>
                           AyahItem(ayah: ayah[index]),
                       itemScrollController: itemScrollController,
                       itemPositionsListener: itemPositionsListener,
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               );
             } else {
               return const Center(
@@ -247,7 +247,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                     onFieldSubmitted: (value) {
                       setState(() {
                         itemScrollController.scrollTo(
-                          index: int.parse(value) + 1,
+                          index: int.parse(value) - 1,
                           duration: const Duration(seconds: 2),
                         );
                         Navigator.pop(context);
