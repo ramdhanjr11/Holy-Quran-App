@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
 import 'package:holy_quran_app/domain/usecases/get_all_saved_ayah.dart';
+import 'package:holy_quran_app/domain/usecases/get_all_saved_ayah_by_surah_id.dart';
 import 'package:holy_quran_app/domain/usecases/insert_ayah.dart';
 import 'package:holy_quran_app/domain/usecases/remove_ayah.dart';
 
@@ -14,11 +15,13 @@ class AyahBloc extends Bloc<AyahEvent, AyahState> {
   final GetAllSavedAyah getAllSavedAyah;
   final InsertAyah insertAyah;
   final RemoveAyah removeAyah;
+  final GetAllSavedAyahBySurahId getAllSavedAyahBySurahId;
 
   AyahBloc({
     required this.getAllSavedAyah,
     required this.insertAyah,
     required this.removeAyah,
+    required this.getAllSavedAyahBySurahId,
   }) : super(AyahInitial()) {
     on<GetAllSavedAyahEvent>((event, emit) async {
       emit(AyahLoading());
@@ -51,6 +54,16 @@ class AyahBloc extends Bloc<AyahEvent, AyahState> {
         emit(AyahError(failure.message));
       }, (data) {
         log('remove data status : $data');
+      });
+    });
+
+    on<GetAllSavedAyahBySurahIdEvent>((event, emit) async {
+      var result = await getAllSavedAyahBySurahId.execute(event.surahId);
+
+      result.fold((failure) {
+        emit(AyahError(failure.message));
+      }, (data) {
+        emit(AyahLoaded(ayahList: data));
       });
     });
   }

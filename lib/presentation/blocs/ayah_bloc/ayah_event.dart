@@ -9,6 +9,12 @@ abstract class AyahEvent extends Equatable {
 
 class GetAllSavedAyahEvent extends AyahEvent {}
 
+class GetAllSavedAyahBySurahIdEvent extends AyahEvent {
+  final int surahId;
+
+  const GetAllSavedAyahBySurahIdEvent({required this.surahId});
+}
+
 class InsertAyahEvent extends AyahEvent {
   final Ayah ayah;
 

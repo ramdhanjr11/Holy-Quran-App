@@ -8,6 +8,7 @@ import 'package:holy_quran_app/data/repositories/sholat_time_repository_impl.dar
 import 'package:holy_quran_app/domain/repositories/quran_repository.dart';
 import 'package:holy_quran_app/domain/repositories/sholat_time_repository.dart';
 import 'package:holy_quran_app/domain/usecases/get_all_saved_ayah.dart';
+import 'package:holy_quran_app/domain/usecases/get_all_saved_ayah_by_surah_id.dart';
 import 'package:holy_quran_app/domain/usecases/get_all_surah.dart';
 import 'package:holy_quran_app/domain/usecases/get_detail_surah.dart';
 import 'package:holy_quran_app/domain/usecases/get_sholat_time.dart';
@@ -63,6 +64,8 @@ void init() {
   locator.registerLazySingleton(() => GetAllSavedAyah(repository: locator()));
   locator.registerLazySingleton(() => InsertAyah(repository: locator()));
   locator.registerLazySingleton(() => RemoveAyah(repository: locator()));
+  locator.registerLazySingleton(
+      () => GetAllSavedAyahBySurahId(repository: locator()));
 
   // blocs
   locator.registerFactory(
@@ -94,6 +97,7 @@ void init() {
       getAllSavedAyah: locator(),
       insertAyah: locator(),
       removeAyah: locator(),
+      getAllSavedAyahBySurahId: locator(),
     ),
   );
 

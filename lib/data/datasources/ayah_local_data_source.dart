@@ -6,6 +6,7 @@ abstract class AyahLocalDataSource {
   Future<List<AyahTable>> getAllAyah();
   Future<int> insertAyah(AyahTable ayah);
   Future<int> removeAyah(int id);
+  Future<List<AyahTable>> getAllAyahBySurahId(int surahId);
 }
 
 class AyahLocalDataSourceImpl implements AyahLocalDataSource {
@@ -35,6 +36,15 @@ class AyahLocalDataSourceImpl implements AyahLocalDataSource {
   Future<int> removeAyah(int id) {
     try {
       return db.removeAyah(id);
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  @override
+  Future<List<AyahTable>> getAllAyahBySurahId(int surahId) {
+    try {
+      return db.getAllAyahBySurahId(surahId);
     } catch (e) {
       throw DatabaseException(e.toString());
     }
