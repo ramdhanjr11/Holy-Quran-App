@@ -91,7 +91,7 @@ class _AyahItemState extends State<AyahItem> {
           child: Text(
             ayah.arab,
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 26,
               color: appLightPrimaryTextColor,
             ),
             textAlign: TextAlign.end,
