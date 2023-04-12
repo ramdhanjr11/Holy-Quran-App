@@ -38,13 +38,45 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: ListView(
           children: [
-            UserAccountsDrawerHeader(
-              accountName: const Text('M Ramdhan Syahputra'),
-              accountEmail: const Text('ramdhanjr690@gmail.com'),
-              decoration: BoxDecoration(
-                color: appLightPrimaryColor,
+            Container(
+              height: 180,
+              color: appLightPrimaryColor,
+              child: Stack(
+                clipBehavior: Clip.antiAlias,
+                children: [
+                  Positioned(
+                    bottom: -20,
+                    right: -20,
+                    child: Opacity(
+                      opacity: .2,
+                      child: SvgPicture.asset(
+                        'assets/quran_item.svg',
+                        width: 230,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ListTile(
+                      title: Text(
+                        'M Ramdhan Syahputra',
+                        style:
+                            textTheme.bodyLarge!.copyWith(color: Colors.white),
+                      ),
+                      subtitle: Text(
+                        'ramdhanjr690@gmail.com',
+                        style:
+                            textTheme.bodyMedium!.copyWith(color: Colors.white),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
+            const ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+            )
           ],
         ),
       ),
