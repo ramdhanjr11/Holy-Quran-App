@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:holy_quran_app/common/themes.dart';
@@ -23,22 +24,22 @@ class OnBoardingPage extends StatelessWidget {
             Text(
               'Quran App',
               style: GoogleFonts.poppins(
-                fontSize: 26,
+                fontSize: 22.sp,
                 fontWeight: FontWeight.bold,
                 color: appLightPrimaryColor,
               ),
             ),
-            const SizedBox(
-              height: 16,
+            SizedBox(
+              height: 16.h,
             ),
             Text(
               'Learn Quran and',
-              style: textTheme.titleMedium!.copyWith(color: appLightGreyColor),
+              style: textTheme.titleSmall!.copyWith(color: appLightGreyColor),
             ),
-            const SizedBox(height: 2),
+            SizedBox(height: 2.h),
             Text(
               'Recite once everyday',
-              style: textTheme.titleMedium!.copyWith(color: appLightGreyColor),
+              style: textTheme.titleSmall!.copyWith(color: appLightGreyColor),
             ),
             const SizedBox(height: 64),
             Stack(
@@ -52,8 +53,8 @@ class OnBoardingPage extends StatelessWidget {
                 Positioned(
                   bottom: -23,
                   child: SizedBox(
-                    height: 60,
-                    width: 170,
+                    height: 60.sp,
+                    width: 170.sp,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -63,7 +64,7 @@ class OnBoardingPage extends StatelessWidget {
                       ),
                       child: Text(
                         'Get Started',
-                        style: textTheme.bodyLarge!.copyWith(
+                        style: textTheme.bodyMedium!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),

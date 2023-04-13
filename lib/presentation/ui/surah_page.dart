@@ -158,7 +158,7 @@ class _SurahPageState extends State<SurahPage> {
                 child: Text(
                   'Siapa saja membaca satu huruf dari Kitabullah (Alquran) maka dia akan mendapat satu kebaikan. Sedangkan satu kebaikan dilipatkan kepada sepuluh semisalnya',
                   textAlign: TextAlign.center,
-                  style: textTheme.bodyLarge!.copyWith(color: Colors.white),
+                  style: textTheme.bodyMedium!.copyWith(color: Colors.white),
                 ),
               ),
             ),

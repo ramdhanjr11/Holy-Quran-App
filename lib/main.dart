@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:holy_quran_app/common/constants.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
@@ -45,51 +46,56 @@ class MyApp extends StatelessWidget {
           create: (context) => di.locator(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Holy Quran App',
-        theme: ThemeData(
-          primaryColor: appLightPrimaryColor,
-          textTheme: appTextTheme,
-        ),
-        navigatorObservers: [routeObserver],
-        onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case '/':
-              return MaterialPageRoute(
-                builder: (context) => const OnBoardingPage(),
-              );
-            case HomePage.routeName:
-              return MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              );
-            case SurahPage.routeName:
-              return MaterialPageRoute(
-                builder: (context) => const SurahPage(),
-              );
-            case SurahDetailPage.routeName:
-              final arg = settings.arguments as Surah;
-              return MaterialPageRoute(
-                builder: (context) => SurahDetailPage(surah: arg),
-              );
-            case SholatTimePage.routeName:
-              return MaterialPageRoute(
-                builder: (context) => const SholatTimePage(),
-              );
-            case SavedAyahPage.routeName:
-              return MaterialPageRoute(
-                builder: (context) => const SavedAyahPage(),
-              );
-            default:
-              return MaterialPageRoute(builder: (_) {
-                return const Scaffold(
-                  body: Center(
-                    child: Text('Page not found :('),
-                  ),
+      child: ScreenUtilInit(
+        designSize: const Size(390, 844),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Holy Quran App',
+          theme: ThemeData(
+            primaryColor: appLightPrimaryColor,
+            textTheme: appTextTheme,
+          ),
+          navigatorObservers: [routeObserver],
+          onGenerateRoute: (settings) {
+            switch (settings.name) {
+              case '/':
+                return MaterialPageRoute(
+                  builder: (context) => const OnBoardingPage(),
                 );
-              });
-          }
-        },
+              case HomePage.routeName:
+                return MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                );
+              case SurahPage.routeName:
+                return MaterialPageRoute(
+                  builder: (context) => const SurahPage(),
+                );
+              case SurahDetailPage.routeName:
+                final arg = settings.arguments as Surah;
+                return MaterialPageRoute(
+                  builder: (context) => SurahDetailPage(surah: arg),
+                );
+              case SholatTimePage.routeName:
+                return MaterialPageRoute(
+                  builder: (context) => const SholatTimePage(),
+                );
+              case SavedAyahPage.routeName:
+                return MaterialPageRoute(
+                  builder: (context) => const SavedAyahPage(),
+                );
+              default:
+                return MaterialPageRoute(builder: (_) {
+                  return const Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                });
+            }
+          },
+        ),
       ),
     );
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
@@ -21,6 +20,7 @@ class SurahTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return ListTile(
       leading: Stack(
         alignment: Alignment.center,
@@ -31,8 +31,14 @@ class SurahTile extends StatelessWidget {
           ),
         ],
       ),
-      title: Text(surahLatinName),
-      subtitle: Text(surahSubtitle),
+      title: Text(
+        surahLatinName,
+        style: textTheme.titleMedium,
+      ),
+      subtitle: Text(
+        surahSubtitle,
+        style: textTheme.bodyMedium,
+      ),
       trailing: Text(
         surahName,
         style: TextStyle(fontSize: 24, color: appLightPrimaryColor),

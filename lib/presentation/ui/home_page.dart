@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/presentation/ui/saved_ayah_page.dart';
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: [
             Container(
-              height: 180,
+              height: 135.h,
               color: appLightPrimaryColor,
               child: Stack(
                 clipBehavior: Clip.antiAlias,
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                       opacity: .2,
                       child: SvgPicture.asset(
                         'assets/quran_item.svg',
-                        width: 230,
+                        width: 180.h,
                       ),
                     ),
                   ),
@@ -61,21 +62,26 @@ class _HomePageState extends State<HomePage> {
                       title: Text(
                         'M Ramdhan Syahputra',
                         style:
-                            textTheme.bodyLarge!.copyWith(color: Colors.white),
+                            textTheme.bodyMedium!.copyWith(color: Colors.white),
                       ),
                       subtitle: Text(
                         'ramdhanjr690@gmail.com',
                         style:
-                            textTheme.bodyMedium!.copyWith(color: Colors.white),
+                            textTheme.bodySmall!.copyWith(color: Colors.white),
                       ),
                     ),
                   )
                 ],
               ),
             ),
-            const ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Logout'),
+            ListTile(
+              leading: const Icon(Icons.exit_to_app),
+              title: Text(
+                'Logout',
+                style: textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             )
           ],
         ),
@@ -90,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   'Assalamualaikum',
-                  style: textTheme.titleLarge!.copyWith(
+                  style: textTheme.titleMedium!.copyWith(
                     color: appLightGreyColor,
                   ),
                 ),
@@ -99,14 +105,14 @@ class _HomePageState extends State<HomePage> {
                   'M Ramdhan Syahputra',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: textTheme.headlineSmall!.copyWith(
+                  style: textTheme.titleMedium!.copyWith(
                     color: appLightPrimaryTextColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Container(
-                  height: MediaQuery.of(context).size.height * .2,
+                  height: 130.h,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -128,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                           right: -20,
                           child: SvgPicture.asset(
                             'assets/quran_item.svg',
-                            height: 115,
+                            height: 100.h,
                           ),
                         ),
                         Column(
@@ -139,9 +145,9 @@ class _HomePageState extends State<HomePage> {
                                 SvgPicture.asset(
                                   'assets/book_icon.svg',
                                   color: Colors.white,
-                                  height: 20,
+                                  height: 12.h,
                                 ),
-                                const SizedBox(width: 6),
+                                SizedBox(width: 6.w),
                                 Text(
                                   'Last Read',
                                   style: textTheme.bodyMedium!.copyWith(
@@ -158,10 +164,10 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8.h),
                             Text(
                               'Ayah No: 1',
-                              style: textTheme.bodyMedium!.copyWith(
+                              style: textTheme.bodySmall!.copyWith(
                                 color: Colors.white,
                               ),
                             ),
@@ -171,13 +177,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
                 Text(
                   'Menu',
-                  style: textTheme.titleLarge!
+                  style: textTheme.titleMedium!
                       .copyWith(color: appLightPrimaryTextColor),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 16.h),
                 _buildMenuTile(
                   gradientColor1: appLightGreenMenuColor,
                   gradientColor2: appLightPurpleMenuColor,
@@ -193,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pushNamed(context, SurahPage.routeName);
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 _buildMenuTile(
                   gradientColor1: appLightBlueMenuColor,
                   gradientColor2: appLightPurpleMenuColor,
@@ -209,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pushNamed(context, SholatTimePage.routeName);
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 _buildMenuTile(
                   gradientColor1: appLightOrangeColor,
                   gradientColor2: appLightPurpleMenuColor,
@@ -258,14 +264,14 @@ class _HomePageState extends State<HomePage> {
       child: ListTile(
         title: Text(
           title,
-          style: textTheme.bodyLarge!.copyWith(
+          style: textTheme.bodyMedium!.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: textTheme.bodyMedium!.copyWith(color: Colors.white),
+          style: textTheme.bodySmall!.copyWith(color: Colors.white),
         ),
         leading: icon ?? svgIcon,
         onTap: onTap,

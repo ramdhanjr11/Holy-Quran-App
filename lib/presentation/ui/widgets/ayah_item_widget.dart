@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
 import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
@@ -24,7 +25,7 @@ class _AyahItemState extends State<AyahItem> {
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          height: 60,
+          height: 50.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: Colors.grey[100],
@@ -34,8 +35,8 @@ class _AyahItemState extends State<AyahItem> {
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 16),
-                width: 40,
-                height: 40,
+                width: 40.w,
+                height: 40.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: appLightPrimaryColor,
@@ -57,19 +58,19 @@ class _AyahItemState extends State<AyahItem> {
                     icon: Icon(
                       Icons.share_outlined,
                       color: appLightPrimaryColor,
-                      size: 35,
+                      size: 30,
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4.w),
                   IconButton(
                     onPressed: () {},
                     icon: Icon(
                       Icons.play_arrow_outlined,
                       color: appLightPrimaryColor,
-                      size: 35,
+                      size: 30,
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4.w),
                   IconButton(
                     onPressed: () async {
                       context.read<AyahBloc>().add(InsertAyahEvent(ayah: ayah));
@@ -77,10 +78,10 @@ class _AyahItemState extends State<AyahItem> {
                     icon: Icon(
                       Icons.bookmark_outline,
                       color: appLightPrimaryColor,
-                      size: 35,
+                      size: 30,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                 ],
               )
             ],
@@ -91,7 +92,7 @@ class _AyahItemState extends State<AyahItem> {
           child: Text(
             ayah.arab,
             style: TextStyle(
-              fontSize: 26,
+              fontSize: 24,
               color: appLightPrimaryTextColor,
             ),
             textAlign: TextAlign.end,
@@ -102,10 +103,10 @@ class _AyahItemState extends State<AyahItem> {
           child: Text(
             ayah.indonesia,
             style:
-                textTheme.bodyLarge!.copyWith(color: appLightPrimaryTextColor),
+                textTheme.bodyMedium!.copyWith(color: appLightPrimaryTextColor),
           ),
         ),
-        const SizedBox(height: 32),
+        SizedBox(height: 32.h),
       ],
     );
   }
