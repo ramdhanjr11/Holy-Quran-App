@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
@@ -60,11 +61,22 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
             } else if (state is SurahDetailLoaded) {
               surahDetail = state.surahDetail;
               ayah = surahDetail.surahAyah;
-              return ScrollablePositionedList.builder(
-                itemCount: surahDetail.totalAyah,
-                itemBuilder: (context, index) => AyahItem(ayah: ayah[index]),
-                itemScrollController: itemScrollController,
-                itemPositionsListener: itemPositionsListener,
+              return ListView(
+                padding: const EdgeInsets.all(0),
+                children: [
+                  _buildSurahBanner(context, surahDetail, textTheme),
+                  SizedBox(height: 24.h),
+                  Expanded(
+                    child: ScrollablePositionedList.builder(
+                      shrinkWrap: true,
+                      itemCount: surahDetail.totalAyah,
+                      itemBuilder: (context, index) =>
+                          AyahItem(ayah: ayah[index]),
+                      itemScrollController: itemScrollController,
+                      itemPositionsListener: itemPositionsListener,
+                    ),
+                  ),
+                ],
               );
             } else {
               return const Center(
@@ -112,7 +124,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
             opacity: .1,
             child: SvgPicture.asset(
               'assets/quran_item.svg',
-              width: 300,
+              width: 300.w,
             ),
           ),
         ),
@@ -126,28 +138,28 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8.h),
               Text(
                 surahDetail.means,
                 style: textTheme.headlineSmall!.copyWith(color: Colors.white),
               ),
-              const SizedBox(height: 12),
-              const SizedBox(
-                width: 250,
-                child: Divider(
+              SizedBox(height: 12.h),
+              SizedBox(
+                width: 250.w,
+                child: const Divider(
                   height: 4,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.h),
               Text(
                 '${surahDetail.type} : ${surahDetail.totalAyah}',
                 style: textTheme.titleMedium!.copyWith(color: Colors.white),
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 32.h),
               SvgPicture.asset(
                 'assets/basmallah_item.svg',
-                width: 260,
+                width: 260.w,
               ),
             ],
           ),

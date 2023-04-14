@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/domain/entities/sholat_time.dart';
 
@@ -56,14 +57,14 @@ class SholatTimeTile extends StatelessWidget {
     required jadwalSholat,
   }) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
       child: ListTile(
         leading: Icon(
-          Icons.av_timer,
-          size: 40,
+          Icons.timelapse_outlined,
+          size: 35,
           color: appLightPrimaryColor,
         ),
         title: Text(

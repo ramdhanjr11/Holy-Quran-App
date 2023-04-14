@@ -19,15 +19,10 @@ class SholatTimePage extends StatefulWidget {
 }
 
 class _SholatTimePageState extends State<SholatTimePage> {
-  DateTime dateSelected = DateTime.now();
+  final dateSelected = DateTime.now();
 
   void _setDateTime(DateTime date) {
-    setState(() {
-      dateSelected = date;
-      context
-          .read<SholatTimeBloc>()
-          .add(GetSholatTimeEvent(date: dateSelected));
-    });
+    context.read<SholatTimeBloc>().add(GetSholatTimeEvent(date: date));
   }
 
   @override
@@ -81,9 +76,10 @@ class _SholatTimePageState extends State<SholatTimePage> {
                   headerMonthBackColor: Colors.transparent,
                 ),
                 dayOptions: DayOptions(
-                    compactMode: false,
-                    selectedBackgroundColor: appLightPrimaryColor,
-                    weekDaySelectedColor: appLightPrimaryColor),
+                  compactMode: false,
+                  selectedBackgroundColor: appLightPrimaryColor,
+                  weekDaySelectedColor: appLightPrimaryColor,
+                ),
                 headerOptions: HeaderOptions(
                     navigationColor: Colors.white,
                     calendarIconColor: Colors.white,
@@ -94,7 +90,6 @@ class _SholatTimePageState extends State<SholatTimePage> {
                     headerTextColor: Colors.white),
                 onChangeDateTime: (datetime) {
                   _setDateTime(datetime.toDateTime());
-                  print(datetime.getDate());
                 },
               ),
               const SizedBox(height: 32),
