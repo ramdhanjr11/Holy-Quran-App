@@ -3,13 +3,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
 
 class SurahTile extends StatelessWidget {
-  String surahNumber;
-  String surahLatinName;
-  String surahName;
-  String surahSubtitle;
-  Function() onTap;
+  final String surahNumber;
+  final String surahLatinName;
+  final String surahName;
+  final String surahSubtitle;
+  final Function() onTap;
 
-  SurahTile({
+  const SurahTile({
     super.key,
     required this.surahNumber,
     required this.surahLatinName,

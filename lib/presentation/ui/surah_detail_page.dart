@@ -250,7 +250,6 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                     textAlign: TextAlign.center,
                     onFieldSubmitted: (value) {
                       Navigator.pop(context);
-                      // scrollController.jumpTo(int.parse(value) - 1);
                       itemScrollController.scrollTo(
                         index: int.parse(value),
                         duration: const Duration(seconds: 2),

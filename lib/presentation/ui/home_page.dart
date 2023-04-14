@@ -144,7 +144,10 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 SvgPicture.asset(
                                   'assets/book_icon.svg',
-                                  color: Colors.white,
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.white,
+                                    BlendMode.srcIn,
+                                  ),
                                   height: 12.h,
                                 ),
                                 SizedBox(width: 6.w),
@@ -192,7 +195,10 @@ class _HomePageState extends State<HomePage> {
                   textTheme: textTheme,
                   svgIcon: SvgPicture.asset(
                     'assets/quran_icon.svg',
-                    color: Colors.white,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                     alignment: Alignment.center,
                   ),
                   onTap: () {
@@ -208,7 +214,10 @@ class _HomePageState extends State<HomePage> {
                   textTheme: textTheme,
                   svgIcon: SvgPicture.asset(
                     'assets/prayer_man_icon.svg',
-                    color: Colors.white,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                     alignment: Alignment.center,
                   ),
                   onTap: () {

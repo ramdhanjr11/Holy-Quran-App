@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
 import 'package:holy_quran_app/domain/usecases/get_all_saved_ayah.dart';
