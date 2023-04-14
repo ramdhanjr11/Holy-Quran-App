@@ -66,15 +66,13 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                 children: [
                   _buildSurahBanner(context, surahDetail, textTheme),
                   SizedBox(height: 24.h),
-                  Expanded(
-                    child: ScrollablePositionedList.builder(
-                      shrinkWrap: true,
-                      itemCount: surahDetail.totalAyah,
-                      itemBuilder: (context, index) =>
-                          AyahItem(ayah: ayah[index]),
-                      itemScrollController: itemScrollController,
-                      itemPositionsListener: itemPositionsListener,
-                    ),
+                  ScrollablePositionedList.builder(
+                    shrinkWrap: true,
+                    itemCount: surahDetail.totalAyah,
+                    itemBuilder: (context, index) =>
+                        AyahItem(ayah: ayah[index]),
+                    itemScrollController: itemScrollController,
+                    itemPositionsListener: itemPositionsListener,
                   ),
                 ],
               );
