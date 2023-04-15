@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: appLightPrimaryColor, size: 30),
         backgroundColor: Colors.white,
         centerTitle: false,
@@ -34,56 +34,6 @@ class _HomePageState extends State<HomePage> {
             color: appLightPrimaryColor,
             fontWeight: FontWeight.bold,
           ),
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            Container(
-              height: 135.h,
-              color: appLightPrimaryColor,
-              child: Stack(
-                clipBehavior: Clip.antiAlias,
-                children: [
-                  Positioned(
-                    bottom: -20,
-                    right: -20,
-                    child: Opacity(
-                      opacity: .2,
-                      child: SvgPicture.asset(
-                        'assets/quran_item.svg',
-                        width: 180.h,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ListTile(
-                      title: Text(
-                        'M Ramdhan Syahputra',
-                        style:
-                            textTheme.bodyMedium!.copyWith(color: Colors.white),
-                      ),
-                      subtitle: Text(
-                        'ramdhanjr690@gmail.com',
-                        style:
-                            textTheme.bodySmall!.copyWith(color: Colors.white),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.exit_to_app),
-              title: Text(
-                'Logout',
-                style: textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          ],
         ),
       ),
       body: Padding(
@@ -102,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'M Ramdhan Syahputra',
+                  'May God\'s will be blessed upon us',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: textTheme.titleMedium!.copyWith(
