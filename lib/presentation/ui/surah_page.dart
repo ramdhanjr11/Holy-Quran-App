@@ -84,35 +84,36 @@ class _SurahPageState extends State<SurahPage> {
               );
             } else if (state is SurahLoaded) {
               final surahList = state.surahList;
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    _buildQuoteBanner(context),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemBuilder: (context, index) {
-                        final surah = surahList[index];
-                        return SurahTile(
-                          surahNumber: surah.number.toString(),
-                          surahLatinName: surah.latinName,
-                          surahName: surah.name,
-                          surahSubtitle: "${surah.type} : ${surah.totalAyah}",
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  SurahDetailPage(surah: surah),
-                            ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) => const Divider(),
-                      itemCount: surahList.length,
+              return ListView.separated(
+                shrinkWrap: true,
+                primary: false,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return Column(
+                      children: [
+                        _buildQuoteBanner(context),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  }
+
+                  final surah = surahList[index - 1];
+                  return SurahTile(
+                    surahNumber: surah.number.toString(),
+                    surahLatinName: surah.latinName,
+                    surahName: surah.name,
+                    surahSubtitle: "${surah.type} : ${surah.totalAyah}",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SurahDetailPage(surah: surah),
+                      ),
                     ),
-                  ],
-                ),
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: surahList.length + 1,
               );
             } else {
               return const Center(
