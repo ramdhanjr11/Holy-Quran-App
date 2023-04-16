@@ -1,11 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran_app/common/themes.dart';
+import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/pages/surah_detail_page.dart';
 import 'package:holy_quran_app/presentation/ui/widgets/surah_page_widgets/search_surah_widget.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/surah_page_widgets/surah_quote_banner_widget.dart';
 import 'package:holy_quran_app/presentation/ui/widgets/surah_page_widgets/surah_tile_widget.dart';
 
 class SurahPage extends StatefulWidget {
@@ -84,37 +84,7 @@ class _SurahPageState extends State<SurahPage> {
               );
             } else if (state is SurahLoaded) {
               final surahList = state.surahList;
-              return ListView.separated(
-                shrinkWrap: true,
-                primary: false,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return Column(
-                      children: [
-                        _buildQuoteBanner(context),
-                        const SizedBox(height: 16),
-                      ],
-                    );
-                  }
-
-                  final surah = surahList[index - 1];
-                  return SurahTile(
-                    surahNumber: surah.number.toString(),
-                    surahLatinName: surah.latinName,
-                    surahName: surah.name,
-                    surahSubtitle: "${surah.type} : ${surah.totalAyah}",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SurahDetailPage(surah: surah),
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: surahList.length + 1,
-              );
+              return _surahContent(surahList);
             } else {
               return const Center(
                 child: Text('Oops someting went wrong..'),
@@ -126,67 +96,37 @@ class _SurahPageState extends State<SurahPage> {
     );
   }
 
-  _buildQuoteBanner(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+  ListView _surahContent(List<Surah> surahList) {
+    return ListView.separated(
+      shrinkWrap: true,
+      primary: false,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          return Column(
+            children: const [
+              SurahQuoteBanner(),
+              SizedBox(height: 16),
+            ],
+          );
+        }
 
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            height: MediaQuery.of(context).size.height * .22,
-            width: MediaQuery.of(context).size.width * .9,
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x19000000),
-                  blurRadius: 24,
-                  offset: Offset(0, 11),
-                ),
-              ],
-              gradient: LinearGradient(
-                colors: [
-                  appLightPurpleColor,
-                  appLightPrimaryColor,
-                ],
-              ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  'Siapa saja membaca satu huruf dari Kitabullah (Alquran) maka dia akan mendapat satu kebaikan. Sedangkan satu kebaikan dilipatkan kepada sepuluh semisalnya',
-                  textAlign: TextAlign.center,
-                  style: textTheme.bodyMedium!.copyWith(color: Colors.white),
-                ),
-              ),
+        final surah = surahList[index - 1];
+        return SurahTile(
+          surahNumber: surah.number.toString(),
+          surahLatinName: surah.latinName,
+          surahName: surah.name,
+          surahSubtitle: "${surah.type} : ${surah.totalAyah}",
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SurahDetailPage(surah: surah),
             ),
           ),
-        ),
-        Positioned(
-          right: 35,
-          top: -35,
-          child: Icon(
-            Icons.format_quote,
-            size: 70,
-            color: appLightSecondaryColor,
-          ),
-        ),
-        Positioned(
-          left: 35,
-          bottom: -35,
-          child: Transform.rotate(
-            angle: 1 * pi,
-            child: Icon(
-              Icons.format_quote,
-              size: 70,
-              color: appLightSecondaryColor,
-            ),
-          ),
-        ),
-      ],
+        );
+      },
+      separatorBuilder: (context, index) => const Divider(),
+      itemCount: surahList.length + 1,
     );
   }
 }
