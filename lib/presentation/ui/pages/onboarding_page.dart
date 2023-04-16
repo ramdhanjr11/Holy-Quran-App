@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:holy_quran_app/common/themes.dart';
-import 'package:holy_quran_app/presentation/ui/home_page.dart';
+import 'package:holy_quran_app/presentation/ui/pages/home_page.dart';
 
 class OnBoardingPage extends StatelessWidget {
   static const routeName = '/onboarding_page';

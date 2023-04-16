@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
-import 'package:holy_quran_app/presentation/ui/saved_ayah_page.dart';
-import 'package:holy_quran_app/presentation/ui/sholat_time_page.dart';
-import 'package:holy_quran_app/presentation/ui/surah_page.dart';
+import 'package:holy_quran_app/presentation/ui/pages/saved_ayah_page.dart';
+import 'package:holy_quran_app/presentation/ui/pages/sholat_time_page.dart';
+import 'package:holy_quran_app/presentation/ui/pages/surah_page.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/home_page_widgets/home_banner_widget.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/home_page_widgets/home_menu_tile_widget.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -61,75 +63,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-                Container(
-                  height: 130.h,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        appLightPurpleColor,
-                        appLightPrimaryColor,
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomCenter,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Positioned(
-                          bottom: -20,
-                          right: -20,
-                          child: SvgPicture.asset(
-                            'assets/quran_item.svg',
-                            height: 100.h,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/book_icon.svg',
-                                  colorFilter: const ColorFilter.mode(
-                                    Colors.white,
-                                    BlendMode.srcIn,
-                                  ),
-                                  height: 12.h,
-                                ),
-                                SizedBox(width: 6.w),
-                                Text(
-                                  'Last Read',
-                                  style: textTheme.bodyMedium!.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const Spacer(),
-                            Text(
-                              'Al-Fatiah',
-                              style: textTheme.bodyLarge!.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8.h),
-                            Text(
-                              'Ayah No: 1',
-                              style: textTheme.bodySmall!.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                const HomeBanner(),
                 SizedBox(height: 32.h),
                 Text(
                   'Menu',
@@ -137,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                       .copyWith(color: appLightPrimaryTextColor),
                 ),
                 SizedBox(height: 16.h),
-                _buildMenuTile(
+                HomeMenuTile(
                   gradientColor1: appLightGreenMenuColor,
                   gradientColor2: appLightPurpleMenuColor,
                   title: 'Read Qur\'an',
@@ -156,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 SizedBox(height: 16.h),
-                _buildMenuTile(
+                HomeMenuTile(
                   gradientColor1: appLightBlueMenuColor,
                   gradientColor2: appLightPurpleMenuColor,
                   title: 'Sholat Time',
@@ -175,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 SizedBox(height: 16.h),
-                _buildMenuTile(
+                HomeMenuTile(
                   gradientColor1: appLightOrangeColor,
                   gradientColor2: appLightPurpleMenuColor,
                   title: 'Saved Ayah',
@@ -194,46 +128,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildMenuTile({
-    required Color gradientColor1,
-    required Color gradientColor2,
-    required String title,
-    required String subtitle,
-    SvgPicture? svgIcon,
-    Icon? icon,
-    required TextTheme textTheme,
-    required Function() onTap,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            gradientColor1,
-            gradientColor2,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: ListTile(
-        title: Text(
-          title,
-          style: textTheme.bodyMedium!.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: textTheme.bodySmall!.copyWith(color: Colors.white),
-        ),
-        leading: icon ?? svgIcon,
-        onTap: onTap,
       ),
     );
   }
