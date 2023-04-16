@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/search_surah_bloc/search_surah_bloc.dart';
-import 'package:holy_quran_app/presentation/ui/surah_detail_page.dart';
+import 'package:holy_quran_app/presentation/ui/pages/surah_detail_page.dart';
 import 'package:holy_quran_app/presentation/ui/widgets/surah_page_widgets/surah_tile_widget.dart';
 
 class SearchSurah extends SearchDelegate {
