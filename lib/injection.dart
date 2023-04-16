@@ -15,6 +15,7 @@ import 'package:holy_quran_app/domain/usecases/get_sholat_time.dart';
 import 'package:holy_quran_app/domain/usecases/insert_ayah.dart';
 import 'package:holy_quran_app/domain/usecases/remove_ayah.dart';
 import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
+import 'package:holy_quran_app/presentation/blocs/saved_ayah_status_bloc/saved_ayah_status_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/search_surah_bloc/search_surah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/sholat_time_bloc/sholat_time_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
@@ -95,6 +96,11 @@ void init() {
   locator.registerFactory(
     () => AyahBloc(
       getAllSavedAyah: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => SavedAyahStatusBloc(
       insertAyah: locator(),
       removeAyah: locator(),
       getAllSavedAyahBySurahId: locator(),

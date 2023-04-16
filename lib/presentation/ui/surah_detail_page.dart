@@ -7,7 +7,7 @@ import 'package:holy_quran_app/domain/entities/ayah.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/domain/entities/surah_detail.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_detail_bloc/surah_detail_bloc.dart';
-import 'package:holy_quran_app/presentation/ui/widgets/ayah_item_widget.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/common/ayah_item_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SurahDetailPage extends StatefulWidget {
@@ -30,9 +30,13 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SurahDetailBloc>(context)
-        .add(GetSurahDetailEvent(id: widget.surah.number));
     surah = widget.surah;
+
+    Future.microtask(() {
+      context
+          .read<SurahDetailBloc>()
+          .add(GetSurahDetailEvent(id: widget.surah.number));
+    });
   }
 
   @override

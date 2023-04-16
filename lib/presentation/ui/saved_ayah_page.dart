@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
-import 'package:holy_quran_app/presentation/ui/widgets/ayah_item_widget.dart';
+import 'package:holy_quran_app/presentation/blocs/saved_ayah_status_bloc/saved_ayah_status_bloc.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/common/ayah_item_widget.dart';
 
 class SavedAyahPage extends StatefulWidget {
   static const routeName = '/saved_ayah_page';
@@ -65,7 +66,9 @@ class _SavedAyahPageState extends State<SavedAyahPage> {
                 return Dismissible(
                   key: ValueKey(ayah.number),
                   onDismissed: (direction) {
-                    context.read<AyahBloc>().add(RemoveAyahEvent(id: ayah.id));
+                    context
+                        .read<SavedAyahStatusBloc>()
+                        .add(RemoveAyahEvent(id: ayah.id));
                   },
                   background: Container(
                     color: Colors.red,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
-import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
+import 'package:holy_quran_app/presentation/blocs/saved_ayah_status_bloc/saved_ayah_status_bloc.dart';
 import 'package:share_plus/share_plus.dart';
 
 class AyahItem extends StatefulWidget {
@@ -16,10 +16,18 @@ class AyahItem extends StatefulWidget {
 }
 
 class _AyahItemState extends State<AyahItem> {
+  late Ayah ayah;
+
+  @override
+  void initState() {
+    super.initState();
+    ayah = widget.ayah;
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final ayah = widget.ayah;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -53,7 +61,8 @@ class _AyahItemState extends State<AyahItem> {
                   IconButton(
                     onPressed: () async {
                       Share.share(
-                          'Dont forget to recite ${ayah.surah} : ${ayah.number}');
+                        'Dont forget to recite ${ayah.surah} : ${ayah.number}',
+                      );
                     },
                     icon: Icon(
                       Icons.share_outlined,
@@ -72,8 +81,10 @@ class _AyahItemState extends State<AyahItem> {
                   ),
                   SizedBox(width: 4.w),
                   IconButton(
-                    onPressed: () async {
-                      context.read<AyahBloc>().add(InsertAyahEvent(ayah: ayah));
+                    onPressed: () {
+                      context
+                          .read<SavedAyahStatusBloc>()
+                          .add(InsertAyahEvent(ayah: ayah));
                     },
                     icon: Icon(
                       Icons.bookmark_outline,
