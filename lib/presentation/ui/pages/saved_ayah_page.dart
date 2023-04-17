@@ -28,14 +28,8 @@ class _SavedAyahPageState extends State<SavedAyahPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.grey,
-          ),
-        ),
         centerTitle: false,
         elevation: 0,
         title: Text(

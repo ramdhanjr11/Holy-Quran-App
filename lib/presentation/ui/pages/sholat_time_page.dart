@@ -38,6 +38,7 @@ class _SholatTimePageState extends State<SholatTimePage> {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             floating: true,
             snap: true,
             title: Text(
@@ -48,15 +49,16 @@ class _SholatTimePageState extends State<SholatTimePage> {
               ),
             ),
             centerTitle: false,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.grey,
+            actions: [
+              IconButton(
+                icon: const Icon(
+                  Icons.explore,
+                  color: Colors.grey,
+                  size: 35,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+            ],
             backgroundColor: Colors.white,
             elevation: 0,
           ),
