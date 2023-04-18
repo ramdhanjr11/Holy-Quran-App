@@ -79,4 +79,20 @@ class QuranRepositoryImpl implements QuranRepository {
       return Left(DatabaseFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> checkAyahIsSaved(Ayah ayah) async {
+    try {
+      var savedAyahList =
+          await ayahLocalDataSource.getAllAyahBySurahId(ayah.surah);
+      var isAyahSaved = savedAyahList.contains(AyahTable.fromEntity(ayah));
+      if (isAyahSaved) {
+        return Right(isAyahSaved);
+      } else {
+        return const Right(false);
+      }
+    } catch (e) {
+      return Left(DatabaseFailure(e.toString()));
+    }
+  }
 }

@@ -22,6 +22,7 @@ class _AyahItemState extends State<AyahItem> {
   void initState() {
     super.initState();
     ayah = widget.ayah;
+    context.read<SavedAyahStatusBloc>().add(CheckAyahStatus(ayah: ayah));
   }
 
   @override
@@ -80,17 +81,37 @@ class _AyahItemState extends State<AyahItem> {
                     ),
                   ),
                   SizedBox(width: 4.w),
-                  IconButton(
-                    onPressed: () {
-                      context
-                          .read<SavedAyahStatusBloc>()
-                          .add(InsertAyahEvent(ayah: ayah));
+                  BlocBuilder<SavedAyahStatusBloc, SavedAyahStatusState>(
+                    builder: (context, state) {
+                      if (state is SavedAyahStatus) {
+                        return IconButton(
+                          onPressed: () {
+                            if (state.status) {
+                              context
+                                  .read<SavedAyahStatusBloc>()
+                                  .add(RemoveAyahEvent(id: ayah.id));
+                            } else {
+                              context
+                                  .read<SavedAyahStatusBloc>()
+                                  .add(InsertAyahEvent(ayah: ayah));
+                            }
+                          },
+                          icon: state.status == true
+                              ? Icon(
+                                  Icons.bookmark,
+                                  color: appLightPrimaryColor,
+                                  size: 30,
+                                )
+                              : Icon(
+                                  Icons.bookmark_outline,
+                                  color: appLightPrimaryColor,
+                                  size: 30,
+                                ),
+                        );
+                      } else {
+                        return Container();
+                      }
                     },
-                    icon: Icon(
-                      Icons.bookmark_outline,
-                      color: appLightPrimaryColor,
-                      size: 30,
-                    ),
                   ),
                   SizedBox(width: 16.w),
                 ],
