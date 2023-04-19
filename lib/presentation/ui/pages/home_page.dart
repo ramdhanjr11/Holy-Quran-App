@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
+import 'package:holy_quran_app/presentation/ui/pages/article_page.dart';
 import 'package:holy_quran_app/presentation/ui/pages/saved_ayah_page.dart';
 import 'package:holy_quran_app/presentation/ui/pages/sholat_time_page.dart';
 import 'package:holy_quran_app/presentation/ui/pages/surah_detail_page.dart';
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
 
     List<Widget> pages = [
       _homeContent(textTheme),
-      const Placeholder(),
+      const ArticlePage(),
       const SholatTimePage(),
       const Placeholder(),
       const SavedAyahPage(),
