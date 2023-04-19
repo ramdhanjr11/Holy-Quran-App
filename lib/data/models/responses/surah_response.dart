@@ -29,7 +29,7 @@ class SurahResponse extends Equatable {
   String toJson() => json.encode(toMap());
 
   factory SurahResponse.fromJson(String source) =>
-      SurahResponse.fromMap(json.decode(source) as List<dynamic>);
+      SurahResponse.fromMap(json.decode(source)['data'] as List<dynamic>);
 
   @override
   List<Object?> get props => [surahList];

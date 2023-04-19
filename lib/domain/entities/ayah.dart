@@ -2,31 +2,29 @@
 import 'package:equatable/equatable.dart';
 
 class Ayah extends Equatable {
-  final int id;
-  final int surah;
-  final int number;
-  final String arab;
-  final String translate;
-  final String indonesia;
+  final int ayahId;
+  final String arabText;
+  final String latinText;
+  final String indonesiaText;
+  final String audio;
+  bool isSaved;
 
-  const Ayah({
-    required this.id,
-    required this.surah,
-    required this.number,
-    required this.arab,
-    required this.translate,
-    required this.indonesia,
+  Ayah({
+    required this.ayahId,
+    required this.arabText,
+    required this.latinText,
+    required this.indonesiaText,
+    required this.audio,
+    this.isSaved = false,
   });
 
   @override
-  List<Object> get props {
-    return [
-      id,
-      surah,
-      number,
-      arab,
-      translate,
-      indonesia,
-    ];
-  }
+  List<Object> get props => [
+        ayahId,
+        arabText,
+        latinText,
+        indonesiaText,
+        audio,
+        isSaved,
+      ];
 }

@@ -84,7 +84,7 @@ class QuranRepositoryImpl implements QuranRepository {
   Future<Either<Failure, bool>> checkAyahIsSaved(Ayah ayah) async {
     try {
       var savedAyahList =
-          await ayahLocalDataSource.getAllAyahBySurahId(ayah.surah);
+          await ayahLocalDataSource.getAllAyahBySurahId(ayah.ayahId);
       var isAyahSaved = savedAyahList.contains(AyahTable.fromEntity(ayah));
       if (isAyahSaved) {
         return Right(isAyahSaved);

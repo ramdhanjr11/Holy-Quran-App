@@ -12,7 +12,7 @@ class SurahModel extends Equatable {
   final String type;
   final String means;
   final String description;
-  final String audio;
+  final String audioFull;
 
   const SurahModel({
     required this.number,
@@ -22,7 +22,7 @@ class SurahModel extends Equatable {
     required this.type,
     required this.means,
     required this.description,
-    required this.audio,
+    required this.audioFull,
   });
 
   Map<String, dynamic> toMap() => {
@@ -33,18 +33,18 @@ class SurahModel extends Equatable {
         'type': type,
         'means': means,
         'description': description,
-        'audio': audio,
+        'audio': audioFull,
       };
 
   factory SurahModel.fromMap(Map<String, dynamic> map) => SurahModel(
         number: map['nomor'] as int,
         name: map['nama'] as String,
-        latinName: map['nama_latin'] as String,
-        totalAyah: map['jumlah_ayat'] as int,
-        type: map['tempat_turun'] as String,
+        latinName: map['namaLatin'] as String,
+        totalAyah: map['jumlahAyat'] as int,
+        type: map['tempatTurun'] as String,
         means: map['arti'] as String,
         description: map['deskripsi'] as String,
-        audio: map['audio'] as String,
+        audioFull: map['audioFull']['01'] as String,
       );
 
   String toJson() => json.encode(toMap());
@@ -60,10 +60,10 @@ class SurahModel extends Equatable {
         type: type,
         means: means,
         description: description,
-        audio: audio,
+        audioFull: audioFull,
       );
 
   @override
   List<Object?> get props =>
-      [number, name, latinName, totalAyah, type, means, description, audio];
+      [number, name, latinName, totalAyah, type, means, description, audioFull];
 }

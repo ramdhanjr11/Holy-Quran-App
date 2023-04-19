@@ -27,7 +27,8 @@ class SurahDetailResponse extends Equatable {
   String toJson() => json.encode(toMap());
 
   factory SurahDetailResponse.fromJson(String source) =>
-      SurahDetailResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+      SurahDetailResponse.fromMap(
+          json.decode(source)['data'] as Map<String, dynamic>);
 
   @override
   List<Object> get props => [surahDetailModel];

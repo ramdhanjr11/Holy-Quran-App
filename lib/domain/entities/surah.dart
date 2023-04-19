@@ -9,7 +9,7 @@ class Surah extends Equatable {
   final String type;
   final String means;
   final String description;
-  final String audio;
+  final String audioFull;
 
   const Surah({
     required this.number,
@@ -19,7 +19,7 @@ class Surah extends Equatable {
     required this.type,
     required this.means,
     required this.description,
-    required this.audio,
+    required this.audioFull,
   });
 
   @override
@@ -32,7 +32,7 @@ class Surah extends Equatable {
       type,
       means,
       description,
-      audio,
+      audioFull,
     ];
   }
 }

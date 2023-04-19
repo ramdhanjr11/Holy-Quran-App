@@ -14,7 +14,7 @@ class SurahDetailModel extends Equatable {
   final String type;
   final String means;
   final String description;
-  final String audio;
+  final String audioFull;
   final List<AyahModel> surahAyah;
 
   const SurahDetailModel({
@@ -25,7 +25,7 @@ class SurahDetailModel extends Equatable {
     required this.type,
     required this.means,
     required this.description,
-    required this.audio,
+    required this.audioFull,
     required this.surahAyah,
   });
 
@@ -38,7 +38,7 @@ class SurahDetailModel extends Equatable {
       'type': type,
       'means': means,
       'description': description,
-      'audio': audio,
+      'audioFull': audioFull,
       'surahAyah': surahAyah.map((x) => x.toMap()).toList(),
     };
   }
@@ -47,12 +47,12 @@ class SurahDetailModel extends Equatable {
     return SurahDetailModel(
       number: map['nomor'] as int,
       name: map['nama'] as String,
-      latinName: map['nama_latin'] as String,
-      totalAyah: map['jumlah_ayat'] as int,
-      type: map['tempat_turun'] as String,
+      latinName: map['namaLatin'] as String,
+      totalAyah: map['jumlahAyat'] as int,
+      type: map['tempatTurun'] as String,
       means: map['arti'] as String,
       description: map['deskripsi'] as String,
-      audio: map['audio'] as String,
+      audioFull: map['audioFull']['01'] as String,
       surahAyah: List<AyahModel>.from(
         (map['ayat'] as List).map<AyahModel>(
           (x) => AyahModel.fromMap(x as Map<String, dynamic>),
@@ -74,7 +74,7 @@ class SurahDetailModel extends Equatable {
         type: type,
         means: means,
         description: description,
-        audio: audio,
+        audioFull: audioFull,
         surahAyah: surahAyah.map((ayah) => ayah.toEntity()).toList(),
       );
 
@@ -87,7 +87,7 @@ class SurahDetailModel extends Equatable {
         type,
         means,
         description,
-        audio,
+        audioFull,
         surahAyah,
       ];
 }

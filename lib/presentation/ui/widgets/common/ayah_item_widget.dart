@@ -52,7 +52,7 @@ class _AyahItemState extends State<AyahItem> {
                 ),
                 child: Center(
                   child: Text(
-                    ayah.number.toString(),
+                    ayah.ayahId.toString(),
                     style: textTheme.titleSmall!.copyWith(color: Colors.white),
                   ),
                 ),
@@ -61,9 +61,7 @@ class _AyahItemState extends State<AyahItem> {
                 children: [
                   IconButton(
                     onPressed: () async {
-                      Share.share(
-                        'Dont forget to recite ${ayah.surah} : ${ayah.number}',
-                      );
+                      Share.share(ayah.indonesiaText);
                     },
                     icon: Icon(
                       Icons.share_outlined,
@@ -89,7 +87,7 @@ class _AyahItemState extends State<AyahItem> {
                             if (state.status) {
                               context
                                   .read<SavedAyahStatusBloc>()
-                                  .add(RemoveAyahEvent(id: ayah.id));
+                                  .add(RemoveAyahEvent(id: ayah.ayahId));
                             } else {
                               context
                                   .read<SavedAyahStatusBloc>()
@@ -122,7 +120,7 @@ class _AyahItemState extends State<AyahItem> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Text(
-            ayah.arab,
+            ayah.arabText,
             style: TextStyle(
               fontSize: 24,
               color: appLightPrimaryTextColor,
@@ -133,7 +131,7 @@ class _AyahItemState extends State<AyahItem> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Text(
-            ayah.indonesia,
+            ayah.indonesiaText,
             style:
                 textTheme.bodyMedium!.copyWith(color: appLightPrimaryTextColor),
           ),

@@ -29,21 +29,23 @@ class DbHelper {
   }
 
   static const String _tbAyah = 'tb_ayah';
-  static const String _columnIdAyah = 'id';
-  static const String _columnSurahAyah = 'surah';
-  static const String _columnNumberAyah = 'number';
-  static const String _columnArabAyah = 'arab';
-  static const String _columnTranslateAyah = 'translate';
-  static const String _columnIndonesia = 'indonesia';
+  static const String _columnAyahId = 'ayahId';
+  static const String _columnSurahId = 'surahId';
+  static const String _columnArabText = 'arabText';
+  static const String _columnLatinText = 'latinText';
+  static const String _columnIndonesiaText = 'indonesiaText';
+  static const String _columnAudio = 'audio';
+  static const String _columnIsSaved = 'isSaved';
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''create table $_tbAyah (
-          $_columnIdAyah integer primary key,
-          $_columnSurahAyah integer not null,
-          $_columnNumberAyah integer not null,
-          $_columnArabAyah text not null,
-          $_columnTranslateAyah text not null,
-          $_columnIndonesia text not null)
+          $_columnAyahId integer primary key,
+          $_columnSurahId integer not null,
+          $_columnArabText text not null,
+          $_columnLatinText text not null,
+          $_columnIndonesiaText text not null,
+          $_columnAudio text not null,
+          $_columnIsSaved boolean not null)
       ''');
   }
 
@@ -66,7 +68,7 @@ class DbHelper {
   Future<List<AyahTable>> getAllAyahBySurahId(int surahId) async {
     var db = await database;
     var result =
-        await db!.query(_tbAyah, where: 'surah = ?', whereArgs: [surahId]);
+        await db!.query(_tbAyah, where: 'surahId = ?', whereArgs: [surahId]);
     return result.map((data) => AyahTable.fromJson(data)).toList();
   }
 }

@@ -26,7 +26,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
   late Surah surah;
   final ScrollController scrollController = ScrollController();
   late SurahDetail surahDetail;
-  late List<Ayah> ayah;
+  late List<Ayah> ayahList;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
               );
             } else if (state is SurahDetailLoaded) {
               surahDetail = state.surahDetail;
-              ayah = surahDetail.surahAyah;
+              ayahList = surahDetail.surahAyah;
               return _surahDetailContent();
             } else {
               return const Center(
@@ -93,7 +93,11 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
             ],
           );
         }
-        return AyahItem(ayah: ayah[index - 1]);
+        final ayah = ayahList[index - 1];
+        return AyahItem(
+          key: ValueKey(ayah.ayahId),
+          ayah: ayah,
+        );
       },
       itemScrollController: itemScrollController,
       itemPositionsListener: itemPositionsListener,

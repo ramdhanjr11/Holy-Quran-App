@@ -1,69 +1,70 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
 import 'package:holy_quran_app/domain/entities/ayah.dart';
 
 class AyahTable extends Equatable {
-  final int id;
-  final int surah;
-  final int number;
-  final String arab;
-  final String translate;
-  final String indonesia;
+  final int ayahId;
+  final String arabText;
+  final String latinText;
+  final String indonesiaText;
+  final String audio;
+  bool isSaved;
 
-  const AyahTable({
-    required this.id,
-    required this.surah,
-    required this.number,
-    required this.arab,
-    required this.translate,
-    required this.indonesia,
+  AyahTable({
+    required this.ayahId,
+    required this.arabText,
+    required this.latinText,
+    required this.indonesiaText,
+    required this.audio,
+    this.isSaved = false,
   });
 
   factory AyahTable.fromEntity(Ayah entity) => AyahTable(
-        id: entity.id,
-        surah: entity.surah,
-        number: entity.number,
-        arab: entity.arab,
-        translate: entity.translate,
-        indonesia: entity.indonesia,
+        ayahId: entity.ayahId,
+        arabText: entity.arabText,
+        latinText: entity.latinText,
+        indonesiaText: entity.indonesiaText,
+        audio: entity.audio,
+        isSaved: entity.isSaved,
       );
 
   factory AyahTable.fromJson(Map<String, dynamic> json) => AyahTable(
-        id: json['id'],
-        surah: json['surah'],
-        number: json['number'],
-        arab: json['arab'],
-        translate: json['translate'],
-        indonesia: json['indonesia'],
+        ayahId: json['nomorAyat'],
+        arabText: json['teksArab'],
+        latinText: json['teksLatin'],
+        indonesiaText: json['teksIndonesia'],
+        audio: json['audio'],
+        isSaved: json['isSaved'],
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'surah': surah,
-        'number': number,
-        'arab': arab,
-        'translate': translate,
-        'indonesia': indonesia,
+        'nomorAyat': ayahId,
+        'teksArab': arabText,
+        'teksLatin': latinText,
+        'teksIndonesia': indonesiaText,
+        'audio': audio,
+        'isSaved': isSaved,
       };
 
   Ayah toEntity() => Ayah(
-        id: id,
-        surah: surah,
-        number: number,
-        arab: arab,
-        translate: translate,
-        indonesia: indonesia,
+        ayahId: ayahId,
+        arabText: arabText,
+        latinText: latinText,
+        indonesiaText: indonesiaText,
+        audio: audio,
+        isSaved: isSaved,
       );
 
   @override
   List<Object> get props {
     return [
-      id,
-      surah,
-      number,
-      arab,
-      translate,
-      indonesia,
+      ayahId,
+      arabText,
+      latinText,
+      indonesiaText,
+      audio,
+      isSaved,
     ];
   }
 }

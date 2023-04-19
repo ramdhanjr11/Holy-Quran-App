@@ -58,11 +58,11 @@ class _SavedAyahPageState extends State<SavedAyahPage> {
               itemBuilder: (context, index) {
                 final ayah = state.ayahList[index];
                 return Dismissible(
-                  key: ValueKey(ayah.number),
+                  key: ValueKey(ayah.ayahId),
                   onDismissed: (direction) {
                     context
                         .read<SavedAyahStatusBloc>()
-                        .add(RemoveAyahEvent(id: ayah.id));
+                        .add(RemoveAyahEvent(id: ayah.ayahId));
                   },
                   background: Container(
                     color: Colors.red,

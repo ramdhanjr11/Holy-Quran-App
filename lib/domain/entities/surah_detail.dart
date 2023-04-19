@@ -11,7 +11,7 @@ class SurahDetail extends Equatable {
   final String type;
   final String means;
   final String description;
-  final String audio;
+  final String audioFull;
   final List<Ayah> surahAyah;
 
   const SurahDetail({
@@ -22,7 +22,7 @@ class SurahDetail extends Equatable {
     required this.type,
     required this.means,
     required this.description,
-    required this.audio,
+    required this.audioFull,
     required this.surahAyah,
   });
 
@@ -36,7 +36,7 @@ class SurahDetail extends Equatable {
       type,
       means,
       description,
-      audio,
+      audioFull,
       surahAyah,
     ];
   }
