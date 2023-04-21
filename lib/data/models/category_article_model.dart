@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:holy_quran_app/domain/entities/category_article.dart';
 
 class CategoryArticleModel extends Equatable {
   final String name;
@@ -11,15 +12,11 @@ class CategoryArticleModel extends Equatable {
   });
 
   factory CategoryArticleModel.fromJson(Map<String, dynamic> json) =>
-      CategoryArticleModel(
-        name: json['name'],
-        url: json['url'],
-      );
+      CategoryArticleModel(name: json['name'], url: json['url']);
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'url': url,
-      };
+  Map<String, dynamic> toJson() => {'name': name, 'url': url};
+
+  CategoryArticle toEntity() => CategoryArticle(name: name, url: url);
 
   @override
   List<Object> get props => [name, url];

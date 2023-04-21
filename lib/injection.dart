@@ -11,10 +11,12 @@ import 'package:holy_quran_app/domain/usecases/check_ayah_is_saved.dart';
 import 'package:holy_quran_app/domain/usecases/get_all_saved_ayah.dart';
 import 'package:holy_quran_app/domain/usecases/get_all_saved_ayah_by_surah_id.dart';
 import 'package:holy_quran_app/domain/usecases/get_all_surah.dart';
+import 'package:holy_quran_app/domain/usecases/get_articles.dart';
 import 'package:holy_quran_app/domain/usecases/get_detail_surah.dart';
 import 'package:holy_quran_app/domain/usecases/get_sholat_time.dart';
 import 'package:holy_quran_app/domain/usecases/insert_ayah.dart';
 import 'package:holy_quran_app/domain/usecases/remove_ayah.dart';
+import 'package:holy_quran_app/presentation/blocs/article_bloc/article_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/saved_ayah_status_bloc/saved_ayah_status_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/search_surah_bloc/search_surah_bloc.dart';
@@ -69,6 +71,7 @@ void init() {
   locator.registerLazySingleton(
       () => GetAllSavedAyahBySurahId(repository: locator()));
   locator.registerLazySingleton(() => CheckAyahIsSaved(repository: locator()));
+  locator.registerLazySingleton(() => GetArticles(repository: locator()));
 
   // blocs
   locator.registerFactory(
@@ -106,6 +109,12 @@ void init() {
       locator(),
       locator(),
       locator(),
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => ArticleBloc(
       locator(),
     ),
   );

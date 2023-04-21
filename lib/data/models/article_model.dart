@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 
 import 'package:holy_quran_app/data/models/category_article_model.dart';
+import 'package:holy_quran_app/domain/entities/article.dart';
 
 class ArticleModel extends Equatable {
   final String id;
@@ -55,6 +56,19 @@ class ArticleModel extends Equatable {
         'type': type,
         'categories': categories
       };
+
+  Article toEntity() => Article(
+        id: id,
+        date: date,
+        dateTime: dateTime,
+        thumbnail: thumbnail,
+        author: author,
+        authorLink: authorLink,
+        title: title,
+        url: url,
+        type: type,
+        categories: categories.map((e) => e.toEntity()).toList(),
+      );
 
   @override
   List<Object> get props {

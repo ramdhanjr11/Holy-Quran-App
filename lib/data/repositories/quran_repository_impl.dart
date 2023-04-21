@@ -1,6 +1,7 @@
 import 'package:holy_quran_app/data/datasources/ayah_local_data_source.dart';
 import 'package:holy_quran_app/data/datasources/quran_remote_data_source.dart';
 import 'package:holy_quran_app/data/models/db/ayah_table.dart';
+import 'package:holy_quran_app/domain/entities/article.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
 import 'package:holy_quran_app/domain/entities/surah_detail.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
@@ -93,6 +94,16 @@ class QuranRepositoryImpl implements QuranRepository {
       }
     } catch (e) {
       return Left(DatabaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Article>>> getArticles() async {
+    try {
+      var result = await remoteDataSource.getArticles();
+      return Right(result.map((data) => data.toEntity()).toList());
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }
