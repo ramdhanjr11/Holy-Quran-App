@@ -9,6 +9,7 @@ import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/presentation/blocs/article_bloc/article_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/ayah_bloc/ayah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/saved_ayah_status_bloc/saved_ayah_status_bloc.dart';
+import 'package:holy_quran_app/presentation/blocs/search_article_bloc/search_article_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/search_surah_bloc/search_surah_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/sholat_time_bloc/sholat_time_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_bloc/surah_bloc.dart';
@@ -63,6 +64,9 @@ class MyApp extends StatelessWidget {
           create: (context) => di.locator(),
         ),
         BlocProvider<ArticleBloc>(
+          create: (context) => di.locator(),
+        ),
+        BlocProvider<SearchArticleBloc>(
           create: (context) => di.locator(),
         ),
       ],

@@ -7,8 +7,8 @@ abstract class SearchArticleEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnQueryArticle extends SearchArticleEvent {
+class OnQueryingArticle extends SearchArticleEvent {
   final String query;
 
-  const OnQueryArticle({required this.query});
+  const OnQueryingArticle({required this.query});
 }
