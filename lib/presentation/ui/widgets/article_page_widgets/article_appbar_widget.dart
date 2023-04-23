@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holy_quran_app/common/themes.dart';
+import 'package:holy_quran_app/presentation/ui/widgets/article_detail_page_widgets.dart/search_article_widget.dart';
 
 class ArticleAppbar extends StatelessWidget {
   const ArticleAppbar({super.key});
@@ -24,7 +25,9 @@ class ArticleAppbar extends StatelessWidget {
       elevation: 0,
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            showSearch(context: context, delegate: SearchArticle());
+          },
           icon: const Icon(
             Icons.search,
             color: Colors.grey,
