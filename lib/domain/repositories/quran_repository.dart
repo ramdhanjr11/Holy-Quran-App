@@ -14,4 +14,5 @@ abstract class QuranRepository {
   Future<Either<Failure, List<Ayah>>> getAllSavedAyahBySurahId(int surahId);
   Future<Either<Failure, bool>> checkAyahIsSaved(Ayah ayah);
   Future<Either<Failure, List<Article>>> getArticles();
+  Future<Either<Failure, List<Article>>> searchArticle(String query);
 }

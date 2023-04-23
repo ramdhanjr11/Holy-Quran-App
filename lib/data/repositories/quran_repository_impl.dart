@@ -106,4 +106,14 @@ class QuranRepositoryImpl implements QuranRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Article>>> searchArticle(String query) async {
+    try {
+      var result = await remoteDataSource.searchArticle(query);
+      return Right(result.map((data) => data.toEntity()).toList());
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

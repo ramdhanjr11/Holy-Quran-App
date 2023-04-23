@@ -14,6 +14,7 @@ abstract class QuranRemoteDataSource {
   Future<List<SurahModel>> getAllSurah();
   Future<SurahDetailModel> getDetailSurah(int surahId);
   Future<List<ArticleModel>> getArticles();
+  Future<List<ArticleModel>> searchArticle(String query);
 }
 
 class QuranRemoteDataSourceImpl extends QuranRemoteDataSource {
@@ -46,6 +47,17 @@ class QuranRemoteDataSourceImpl extends QuranRemoteDataSource {
   @override
   Future<List<ArticleModel>> getArticles() async {
     var response = await http.get(Uri.parse(newsBaseUrl));
+    var result = response.body;
+    if (response.statusCode == 200) {
+      return ArticleListResponse.fromJson(json.decode(result)['data']).articles;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<ArticleModel>> searchArticle(String query) async {
+    var response = await http.get(Uri.parse('$newsBaseUrl?page=1&s=$query'));
     var result = response.body;
     if (response.statusCode == 200) {
       return ArticleListResponse.fromJson(json.decode(result)['data']).articles;
