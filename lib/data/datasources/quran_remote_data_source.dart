@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:holy_quran_app/common/constants.dart';
 import 'package:holy_quran_app/common/exceptions.dart';
 import 'package:holy_quran_app/data/models/article_model.dart';
+import 'package:holy_quran_app/data/models/dua_model.dart';
 import 'package:holy_quran_app/data/models/responses/article_list_response.dart';
+import 'package:holy_quran_app/data/models/responses/dua_response.dart';
 import 'package:holy_quran_app/data/models/responses/surah_detail_response.dart';
 import 'package:holy_quran_app/data/models/surah_detail_model.dart';
 import 'package:holy_quran_app/data/models/surah_model.dart';
@@ -15,6 +17,7 @@ abstract class QuranRemoteDataSource {
   Future<SurahDetailModel> getDetailSurah(int surahId);
   Future<List<ArticleModel>> getArticles();
   Future<List<ArticleModel>> searchArticle(String query);
+  Future<List<DuaModel>> getDuahs();
 }
 
 class QuranRemoteDataSourceImpl extends QuranRemoteDataSource {
@@ -61,6 +64,17 @@ class QuranRemoteDataSourceImpl extends QuranRemoteDataSource {
     var result = response.body;
     if (response.statusCode == 200) {
       return ArticleListResponse.fromJson(json.decode(result)['data']).articles;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DuaModel>> getDuahs() async {
+    var response = await http.get(Uri.parse(duaBaseUrl));
+    var result = response.body;
+    if (response.statusCode == 200) {
+      return DuaResponse.fromJson(json.decode(result)).duaList;
     } else {
       throw ServerException();
     }

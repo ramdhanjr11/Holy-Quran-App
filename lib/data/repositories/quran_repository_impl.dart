@@ -3,6 +3,7 @@ import 'package:holy_quran_app/data/datasources/quran_remote_data_source.dart';
 import 'package:holy_quran_app/data/models/db/ayah_table.dart';
 import 'package:holy_quran_app/domain/entities/article.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
+import 'package:holy_quran_app/domain/entities/dua.dart';
 import 'package:holy_quran_app/domain/entities/surah_detail.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/common/failures.dart';
@@ -111,6 +112,16 @@ class QuranRepositoryImpl implements QuranRepository {
   Future<Either<Failure, List<Article>>> searchArticle(String query) async {
     try {
       var result = await remoteDataSource.searchArticle(query);
+      return Right(result.map((data) => data.toEntity()).toList());
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Dua>>> getDuahs() async {
+    try {
+      var result = await remoteDataSource.getDuahs();
       return Right(result.map((data) => data.toEntity()).toList());
     } catch (e) {
       return Left(ServerFailure(e.toString()));

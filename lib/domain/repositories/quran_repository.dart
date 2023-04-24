@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:holy_quran_app/common/failures.dart';
 import 'package:holy_quran_app/domain/entities/article.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
+import 'package:holy_quran_app/domain/entities/dua.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/domain/entities/surah_detail.dart';
 
@@ -15,4 +16,5 @@ abstract class QuranRepository {
   Future<Either<Failure, bool>> checkAyahIsSaved(Ayah ayah);
   Future<Either<Failure, List<Article>>> getArticles();
   Future<Either<Failure, List<Article>>> searchArticle(String query);
+  Future<Either<Failure, List<Dua>>> getDuahs();
 }
