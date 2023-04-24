@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:holy_quran_app/domain/entities/dua.dart';
 
 class DuaModel extends Equatable {
   final String id;
@@ -31,6 +32,14 @@ class DuaModel extends Equatable {
         'latin': latin,
         'artinya': indonesia,
       };
+
+  Dua toEntity() => Dua(
+        id: id,
+        dua: dua,
+        ayah: ayah,
+        latin: latin,
+        indonesia: indonesia,
+      );
 
   @override
   List<Object> get props {
