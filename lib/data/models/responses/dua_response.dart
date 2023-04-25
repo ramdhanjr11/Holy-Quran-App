@@ -8,10 +8,9 @@ class DuaResponse extends Equatable {
 
   const DuaResponse({required this.duaList});
 
-  factory DuaResponse.fromJson(Map<String, dynamic> json) => DuaResponse(
-        duaList: List.from(json as List)
-            .map((data) => DuaModel.fromJson(data))
-            .toList(),
+  factory DuaResponse.fromJson(List<dynamic> json) => DuaResponse(
+        duaList:
+            List.from(json).map((data) => DuaModel.fromJson(data)).toList(),
       );
 
   @override

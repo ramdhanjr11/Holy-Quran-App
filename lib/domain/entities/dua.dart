@@ -7,13 +7,15 @@ class Dua extends Equatable {
   final String ayah;
   final String latin;
   final String indonesia;
+  bool isExpanded;
 
-  const Dua({
+  Dua({
     required this.id,
     required this.dua,
     required this.ayah,
     required this.latin,
     required this.indonesia,
+    this.isExpanded = false,
   });
 
   @override
