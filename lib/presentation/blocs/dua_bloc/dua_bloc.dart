@@ -9,6 +9,9 @@ part 'dua_state.dart';
 class DuaBloc extends Bloc<DuaEvent, DuaState> {
   final GetDuasUseCase _getDuas;
 
+  final List<Dua> _duas = [];
+  List<Dua> get duas => _duas;
+
   DuaBloc(this._getDuas) : super(DuaInitial()) {
     on<GetDuas>((event, emit) async {
       emit(DuaLoading());
@@ -18,6 +21,7 @@ class DuaBloc extends Bloc<DuaEvent, DuaState> {
       result.fold((failure) {
         emit(DuaError(message: failure.message));
       }, (data) {
+        if (_duas.isEmpty) duas.addAll(data);
         emit(DuaLoaded(duas: data));
       });
     });
