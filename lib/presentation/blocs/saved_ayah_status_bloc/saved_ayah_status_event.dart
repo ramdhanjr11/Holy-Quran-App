@@ -7,22 +7,24 @@ abstract class SavedAyahStatusEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CheckAyahStatus extends SavedAyahStatusEvent {
-  final Ayah ayah;
+class GetAllSavedAyahStatusEvent extends SavedAyahStatusEvent {
+  final int surahId;
 
-  const CheckAyahStatus({
-    required this.ayah,
+  const GetAllSavedAyahStatusEvent({
+    required this.surahId,
   });
 }
 
 class InsertAyahEvent extends SavedAyahStatusEvent {
   final Ayah ayah;
+  final int surahId;
 
-  const InsertAyahEvent({required this.ayah});
+  const InsertAyahEvent({required this.ayah, required this.surahId});
 }
 
 class RemoveAyahEvent extends SavedAyahStatusEvent {
-  final int id;
+  final int ayahId;
+  final int surahId;
 
-  const RemoveAyahEvent({required this.id});
+  const RemoveAyahEvent({required this.ayahId, required this.surahId});
 }

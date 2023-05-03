@@ -8,7 +8,7 @@ class InsertAyah {
 
   InsertAyah({required this.repository});
 
-  Future<Either<Failure, int>> execute(Ayah ayah) async {
-    return repository.insertAyah(ayah);
+  Future<Either<Failure, int>> execute(Ayah ayah, int surahId) async {
+    return repository.insertAyah(ayah, surahId);
   }
 }

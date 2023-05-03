@@ -11,9 +11,8 @@ class SavedAyahStatusInitial extends SavedAyahStatusState {}
 
 class SavedAyahStatus extends SavedAyahStatusState {
   final String message;
-  final bool status;
 
-  const SavedAyahStatus({required this.message, required this.status});
+  const SavedAyahStatus({required this.message});
 }
 
 class SavedAyahLoading extends SavedAyahStatusState {}

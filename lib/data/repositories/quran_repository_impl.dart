@@ -50,10 +50,11 @@ class QuranRepositoryImpl implements QuranRepository {
   }
 
   @override
-  Future<Either<Failure, int>> insertAyah(Ayah ayah) async {
+  Future<Either<Failure, int>> insertAyah(Ayah ayah, int surahId) async {
     try {
-      var result =
-          await ayahLocalDataSource.insertAyah(AyahTable.fromEntity(ayah));
+      var result = await ayahLocalDataSource.insertAyah(
+        AyahTable.fromEntity(ayah, surahId),
+      );
       return Right(result);
     } catch (e) {
       return Left(DatabaseFailure(e.toString()));
@@ -61,9 +62,9 @@ class QuranRepositoryImpl implements QuranRepository {
   }
 
   @override
-  Future<Either<Failure, int>> removeAyah(int id) async {
+  Future<Either<Failure, int>> removeAyah(int ayahId, int surahId) async {
     try {
-      var result = await ayahLocalDataSource.removeAyah(id);
+      var result = await ayahLocalDataSource.removeAyah(ayahId, surahId);
       return Right(result);
     } catch (e) {
       return Left(DatabaseFailure(e.toString()));
@@ -76,23 +77,11 @@ class QuranRepositoryImpl implements QuranRepository {
   ) async {
     try {
       var result = await ayahLocalDataSource.getAllAyahBySurahId(surahId);
-      return Right(result.map((data) => data.toEntity()).toList());
-    } catch (e) {
-      return Left(DatabaseFailure(e.toString()));
-    }
-  }
+      var tableToEntity = result.map((data) => data.toEntity()).toList();
 
-  @override
-  Future<Either<Failure, bool>> checkAyahIsSaved(Ayah ayah) async {
-    try {
-      var savedAyahList =
-          await ayahLocalDataSource.getAllAyahBySurahId(ayah.ayahId);
-      var isAyahSaved = savedAyahList.contains(AyahTable.fromEntity(ayah));
-      if (isAyahSaved) {
-        return Right(isAyahSaved);
-      } else {
-        return const Right(false);
-      }
+      // log(tableToEntity.toString());
+
+      return Right(tableToEntity);
     } catch (e) {
       return Left(DatabaseFailure(e.toString()));
     }

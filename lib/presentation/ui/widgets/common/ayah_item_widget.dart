@@ -8,8 +8,15 @@ import 'package:share_plus/share_plus.dart';
 
 class AyahItem extends StatefulWidget {
   final Ayah ayah;
+  int? surahId;
+  final bool isSaved;
 
-  const AyahItem({super.key, required this.ayah});
+  AyahItem({
+    super.key,
+    required this.ayah,
+    this.surahId,
+    required this.isSaved,
+  });
 
   @override
   State<AyahItem> createState() => _AyahItemState();
@@ -17,18 +24,20 @@ class AyahItem extends StatefulWidget {
 
 class _AyahItemState extends State<AyahItem> {
   late Ayah ayah;
+  late int? surahId;
+  late bool isSaved;
 
   @override
   void initState() {
     super.initState();
     ayah = widget.ayah;
-    context.read<SavedAyahStatusBloc>().add(CheckAyahStatus(ayah: ayah));
+    widget.surahId != null ? surahId = widget.surahId : surahId = null;
+    isSaved = widget.isSaved;
   }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -79,38 +88,39 @@ class _AyahItemState extends State<AyahItem> {
                     ),
                   ),
                   SizedBox(width: 4.w),
-                  BlocBuilder<SavedAyahStatusBloc, SavedAyahStatusState>(
-                    builder: (context, state) {
-                      if (state is SavedAyahStatus) {
-                        return IconButton(
-                          onPressed: () {
-                            if (state.status) {
-                              context
-                                  .read<SavedAyahStatusBloc>()
-                                  .add(RemoveAyahEvent(id: ayah.ayahId));
-                            } else {
-                              context
-                                  .read<SavedAyahStatusBloc>()
-                                  .add(InsertAyahEvent(ayah: ayah));
-                            }
-                          },
-                          icon: state.status == true
-                              ? Icon(
-                                  Icons.bookmark,
-                                  color: appLightPrimaryColor,
-                                  size: 30,
-                                )
-                              : Icon(
-                                  Icons.bookmark_outline,
-                                  color: appLightPrimaryColor,
-                                  size: 30,
+                  if (surahId != null)
+                    IconButton(
+                      onPressed: () {
+                        if (isSaved) {
+                          context.read<SavedAyahStatusBloc>().add(
+                                RemoveAyahEvent(
+                                  ayahId: ayah.ayahId,
+                                  surahId: surahId!,
                                 ),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    },
-                  ),
+                              );
+                          setState(() {
+                            isSaved = !isSaved;
+                          });
+                        } else {
+                          context.read<SavedAyahStatusBloc>().add(
+                              InsertAyahEvent(ayah: ayah, surahId: surahId!));
+                          setState(() {
+                            isSaved = !isSaved;
+                          });
+                        }
+                      },
+                      icon: isSaved == true
+                          ? Icon(
+                              Icons.bookmark,
+                              color: appLightPrimaryColor,
+                              size: 30,
+                            )
+                          : Icon(
+                              Icons.bookmark_outline,
+                              color: appLightPrimaryColor,
+                              size: 30,
+                            ),
+                    ),
                   SizedBox(width: 16.w),
                 ],
               )

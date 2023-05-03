@@ -35,28 +35,31 @@ class DbHelper {
   static const String _columnLatinText = 'latinText';
   static const String _columnIndonesiaText = 'indonesiaText';
   static const String _columnAudio = 'audio';
-  static const String _columnIsSaved = 'isSaved';
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''create table $_tbAyah (
-          $_columnAyahId integer primary key,
+          $_columnAyahId integer not null,
           $_columnSurahId integer not null,
           $_columnArabText text not null,
           $_columnLatinText text not null,
           $_columnIndonesiaText text not null,
-          $_columnAudio text not null,
-          $_columnIsSaved boolean not null)
+          $_columnAudio text not null)
       ''');
   }
 
   Future<int> insertAyah(AyahTable ayah) async {
     var db = await database;
-    return await db!.insert(_tbAyah, ayah.toJson());
+    var ayahJson = ayah.toJson();
+    return await db!.insert(_tbAyah, ayahJson);
   }
 
-  Future<int> removeAyah(int id) async {
+  Future<int> removeAyah(int ayahId, int surahId) async {
     var db = await database;
-    return await db!.delete(_tbAyah, where: 'id = ?', whereArgs: [id]);
+    return await db!.delete(
+      _tbAyah,
+      where: 'ayahId = ? AND surahId = ?',
+      whereArgs: [ayahId, surahId],
+    );
   }
 
   Future<List<AyahTable>> getAllAyah() async {

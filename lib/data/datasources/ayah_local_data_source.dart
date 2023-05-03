@@ -5,7 +5,7 @@ import 'package:holy_quran_app/data/models/db/ayah_table.dart';
 abstract class AyahLocalDataSource {
   Future<List<AyahTable>> getAllAyah();
   Future<int> insertAyah(AyahTable ayah);
-  Future<int> removeAyah(int id);
+  Future<int> removeAyah(int ayahId, int surahId);
   Future<List<AyahTable>> getAllAyahBySurahId(int surahId);
 }
 
@@ -33,9 +33,9 @@ class AyahLocalDataSourceImpl implements AyahLocalDataSource {
   }
 
   @override
-  Future<int> removeAyah(int id) {
+  Future<int> removeAyah(int ayahId, int surahId) {
     try {
-      return db.removeAyah(id);
+      return db.removeAyah(ayahId, surahId);
     } catch (e) {
       throw DatabaseException(e.toString());
     }

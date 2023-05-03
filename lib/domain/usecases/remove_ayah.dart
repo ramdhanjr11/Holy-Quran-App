@@ -7,7 +7,7 @@ class RemoveAyah {
 
   RemoveAyah({required this.repository});
 
-  Future<Either<Failure, int>> execute(int id) async {
-    return repository.removeAyah(id);
+  Future<Either<Failure, int>> execute(int ayahId, int surahId) async {
+    return repository.removeAyah(ayahId, surahId);
   }
 }

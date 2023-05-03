@@ -22,7 +22,6 @@ import 'package:holy_quran_app/presentation/ui/pages/sholat_time_page.dart';
 import 'package:holy_quran_app/presentation/ui/pages/surah_detail_page.dart';
 import 'package:holy_quran_app/presentation/ui/pages/surah_page.dart';
 import 'injection.dart' as di;
-import 'package:nested/nested.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -101,7 +100,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  List<SingleChildWidget> get _blocProviders {
+  get _blocProviders {
     return [
       BlocProvider<SurahBloc>(
         create: (context) => di.locator(),

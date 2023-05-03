@@ -10,10 +10,9 @@ abstract class QuranRepository {
   Future<Either<Failure, List<Surah>>> getAllSurah();
   Future<Either<Failure, SurahDetail>> getDetailSurah(int id);
   Future<Either<Failure, List<Ayah>>> getAllSavedAyah();
-  Future<Either<Failure, int>> insertAyah(Ayah ayah);
-  Future<Either<Failure, int>> removeAyah(int id);
+  Future<Either<Failure, int>> insertAyah(Ayah ayah, int surahId);
+  Future<Either<Failure, int>> removeAyah(int ayahId, int surahId);
   Future<Either<Failure, List<Ayah>>> getAllSavedAyahBySurahId(int surahId);
-  Future<Either<Failure, bool>> checkAyahIsSaved(Ayah ayah);
   Future<Either<Failure, List<Article>>> getArticles();
   Future<Either<Failure, List<Article>>> searchArticle(String query);
   Future<Either<Failure, List<Dua>>> getDuahs();

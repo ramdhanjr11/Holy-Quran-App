@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran_app/domain/entities/ayah.dart';
 import 'package:holy_quran_app/domain/entities/surah.dart';
 import 'package:holy_quran_app/domain/entities/surah_detail.dart';
+import 'package:holy_quran_app/presentation/blocs/saved_ayah_status_bloc/saved_ayah_status_bloc.dart';
 import 'package:holy_quran_app/presentation/blocs/surah_detail_bloc/surah_detail_bloc.dart';
 import 'package:holy_quran_app/presentation/ui/widgets/common/ayah_item_widget.dart';
 import 'package:holy_quran_app/presentation/ui/widgets/surah_detail_page_widgets/surah_detail_appbar_widget.dart';
@@ -36,6 +37,9 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
       context
           .read<SurahDetailBloc>()
           .add(GetSurahDetailEvent(id: widget.surah.number));
+      context
+          .read<SavedAyahStatusBloc>()
+          .add(GetAllSavedAyahStatusEvent(surahId: widget.surah.number));
     });
   }
 
@@ -81,6 +85,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
   }
 
   Widget _surahDetailContent() {
+    final allSavedAyah = context.read<SavedAyahStatusBloc>().allSavedAyah;
     return ScrollablePositionedList.builder(
       shrinkWrap: true,
       itemCount: surahDetail.totalAyah + 1,
@@ -94,9 +99,11 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
           );
         }
         final ayah = ayahList[index - 1];
+        final ayahIsSaved = allSavedAyah.contains(ayah);
         return AyahItem(
-          key: ValueKey(ayah.ayahId),
           ayah: ayah,
+          surahId: surahDetail.number,
+          isSaved: ayahIsSaved,
         );
       },
       itemScrollController: itemScrollController,

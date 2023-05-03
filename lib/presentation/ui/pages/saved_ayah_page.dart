@@ -60,9 +60,12 @@ class _SavedAyahPageState extends State<SavedAyahPage> {
                 return Dismissible(
                   key: ValueKey(ayah.ayahId),
                   onDismissed: (direction) {
-                    context
-                        .read<SavedAyahStatusBloc>()
-                        .add(RemoveAyahEvent(id: ayah.ayahId));
+                    context.read<SavedAyahStatusBloc>().add(
+                          RemoveAyahEvent(
+                            ayahId: ayah.ayahId,
+                            surahId: ayah.surahId,
+                          ),
+                        );
                   },
                   background: Container(
                     color: Colors.red,
@@ -76,7 +79,7 @@ class _SavedAyahPageState extends State<SavedAyahPage> {
                       ),
                     ),
                   ),
-                  child: AyahItem(ayah: ayah),
+                  child: AyahItem(ayah: ayah, isSaved: false),
                 );
               },
               itemCount: state.ayahList.length,
