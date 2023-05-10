@@ -7,6 +7,7 @@ import 'package:flutter_timeline_calendar/timeline/utils/calendar_types.dart';
 import 'package:flutter_timeline_calendar/timeline/widget/timeline_calendar.dart';
 import 'package:holy_quran_app/common/themes.dart';
 import 'package:holy_quran_app/presentation/blocs/sholat_time_bloc/sholat_time_bloc.dart';
+import 'package:holy_quran_app/presentation/ui/pages/qiblah_page.dart';
 import 'package:holy_quran_app/presentation/ui/widgets/sholat_time_page_widgets/sholat_time_tile_widget.dart';
 
 class SholatTimePage extends StatefulWidget {
@@ -51,12 +52,19 @@ class _SholatTimePageState extends State<SholatTimePage> {
             centerTitle: false,
             actions: [
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.explore,
-                  color: Colors.grey,
+                  color: appLightPrimaryColor,
                   size: 35,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QiblahPage(),
+                    ),
+                  );
+                },
               ),
             ],
             backgroundColor: Colors.white,
